@@ -14,11 +14,14 @@ import VenueForm from "./pages/VenueForm";
 import RequireAuth from './components/RequireAuth.jsx';
 import Practice from './pages/Practice.jsx';
 import EditConcertPage from './pages/EditConcertPage.jsx';
+import ConcertDetail from "./pages/ConcertDetail.jsx";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <MyNavbar />
+      <main className="flex-1">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -29,9 +32,10 @@ const App = () => {
         <Route path="/test-auth" element={<TestAuth />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/practice" element={<Practice />} />
+        <Route path="/concerts/:id" element={<ConcertDetail />} />
         
         <Route
-          path="/dashboard"
+          path="/createConcert"
           element={
             <RequireAuth>
               <CreateConcertPage />
@@ -39,7 +43,7 @@ const App = () => {
           }
         />
         <Route
-          path="/concerts/:id/edit"
+           path="/concerts/:id/edit"
           element={
             <RequireAuth>
               <EditConcertPage />
@@ -56,7 +60,9 @@ const App = () => {
           }
         />
         </Routes>
-    </>
+        </main>
+        <Footer />
+    </div>
   );
 };
 

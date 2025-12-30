@@ -1,127 +1,135 @@
-import React, { useEffect,useState } from 'react';
-
-import {api} from "../api.js";
-
-import { getAuthInfo, isAuthenticated } from "../auth"; // ✅ Correct import
-import { Link } from "react-router-dom"; // ✅ You also need this
-
+import React, { useMemo } from "react";
+import api from "../api/api"; // ✅ default import (match your hook)
+import useConcerts from "../hooks/useConcerts"; // ✅ adjust path
+import { deleteConcert } from "../api/concerts";
+import { isAuthenticated } from "../auth";
+import { Link } from "react-router-dom";
 
 const Concerts = () => {
 
-  const [concerts,setConcerts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  
+  const isAdmin = isAuthenticated()
+  const { concerts, loading, error, removeConcert } = useConcerts();
   
   // 📅 Date formatter (runs once per render)
-  const fmt = new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'full',
-    timeStyle: 'short',
-    timeZone: 'Europe/Athens'
-  });
- 
+  const fmt = useMemo(
+    () =>
+      new Intl.DateTimeFormat("en-GB", {
+        dateStyle: "full",
+        timeStyle: "short",
+        timeZone: "Europe/Athens",
+      }),
+    []
+  );
+ {/*Fetching concerts and removeConcert are called from useConcerts,
+  I DID THIS CAUSE I WANTED TO FETCH AGAIN CONCERTS FOR THE HOME
+  SO I DONT WRITE CODE TO FETCH TWICE THE CONCERTS */}
+  const handleDelete = async (id) => {
+    if (!isAuthenticated()) return;
+    if (!window.confirm("Delete this concert?")) return;
 
-  useEffect(() =>{
-
-    let isMounted = true;             // avoid state updates if unmounted
-    setLoading(true);
-    setError(null);
-
-    async function fetchConcerts() {
-      try{
-        const res = await api.get('/concerts/');
-        console.log("✅ API response:", res.data);
-        if(isMounted){
-          setConcerts(res.data);
-          setLoading(false);
-          console.log("📦 Concerts state updated:", res.data);
-        }
-
-      } catch (err){
-        if(isMounted){
-          console.error('Error fetching concerts:', err);
-          setError('Could not load concerts');
-          setLoading(false);
-        }
-
-      }
-
+    try {
+      await deleteConcert(id)
+      removeConcert(id); // ✅ updates hook state
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert("Failed to delete concert.");
     }
-
-    fetchConcerts();
-    return () => { isMounted = false; };
-    
-  },[]);
-
+  };
+ 
   if (loading) return <p>Loading concerts...</p>;
   if (error)   return <p style={{color:'crimson'}}>Error: {error}</p>;
   
-  function handleDelete(id) {
-  if (!isAuthenticated()) return;           // safety
-  if (!window.confirm("Delete this concert?")) return;
-
-  api.delete(`/concerts/${id}/`)
-    .then(() => {
-      setConcerts(prev => prev.filter(c => c.id !== id));
-    })
-    .catch(err => {
-      console.error("Delete failed:", err);
-      alert("Failed to delete concert.");
-    });
-}
+  
 
 
- return (
-  <div className="concerts-page">
-    <h1>Concerts</h1>
+  return (
+    <div className="concerts-page">
+      <h1>Concerts</h1>
 
-    {concerts.length === 0 ? (
-      <p>No concerts available.</p>
-    ) : (
-      <ul>
-        {concerts.map(concert => (
-          <li key={concert.id} className="mb-6 border p-4 rounded-xl shadow">
-            <h2 className="text-xl font-semibold">
-                {concert.title || 'Untitled Concert'}
-            </h2>
-            <p><strong>Date:</strong> {fmt.format(new Date(concert.date))}</p>
-            {Array.isArray(concert.program) && concert.program.length > 0 && (
-              <ul style={{ marginTop: 4, paddingLeft: 0, listStyle: 'none' }}>
-                {[...concert.program]
-                  .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-                  .map(piece => (
-                    <li key={piece.id}>
-                      {piece.composer}: {piece.title}
-                    </li>
-                  ))}
-              </ul>
-            )}
+      {concerts.length === 0 ? (
+        <p>No concerts available.</p>
+      ) : (
+        <>
+          {/* Admin action */}
+          {isAdmin && (
+            <Link
+              to="/createConcert"
+              className="inline-block text-sm px-3 py-1 rounded bg-black text-white mb-4"
+            >
+              + Create Concert
+            </Link>
+          )}
 
-            {/* ✅ Only admins see this */}
-            {isAuthenticated() && (
-              <>
-                <Link
-                  to={`/concerts/${concert.id}/edit`}
-                  className="inline-block text-sm px-3 py-1 rounded bg-black text-white mr-2"
-                >
-                  Edit
-                </Link>
-                <button
-                  onClick={() => handleDelete(concert.id)}
-                  className="inline-block text-sm px-3 py-1 rounded bg-red-600 text-white"
-                >
-                  Delete
-                </button>
-              </>
-            )}
-                      
-          </li>
+          <ul>
+            {concerts.map((concert) => (
+              <li
+                key={concert.id}
+                className="mb-6 border p-4 rounded-xl shadow"
+              >
+                <h2 className="text-xl font-semibold">
+                  {concert.title || "Untitled Concert"}
+                </h2>
 
-        ))}
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {fmt.format(new Date(concert.date_start))}
+                </p>
 
-      </ul>
-    )}
-  </div>
-);
+                {Array.isArray(concert.program) &&
+                  concert.program.length > 0 && (
+                    <ul
+                      style={{
+                        marginTop: 4,
+                        paddingLeft: 0,
+                        listStyle: "none",
+                      }}
+                    >
+                      {[...concert.program]
+                        .sort(
+                          (a, b) =>
+                            (a.order ?? 0) - (b.order ?? 0)
+                        )
+                        .map((piece) => (
+                          <li key={piece.id}>
+                            {piece.composer}: {piece.title}
+                          </li>
+                        ))}
+                    </ul>
+                  )}
+                  {/* 
+                    <p className="text-xs text-gray-500">
+                  Auth: {String(isAdmin)}
+                </p>
+                */}
+              
+                {/* Admin-only per concert */}
+                {isAdmin  && (
+                  
+                  <div className="mt-3">
+                    <Link
+                      to={`/concerts/${concert.id}/edit`}
+                      className="inline-block text-sm px-3 py-1 rounded bg-black text-white mr-2"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() =>
+                        handleDelete(concert.id)
+                      }
+                      className="inline-block text-sm px-3 py-1 rounded bg-red-600 text-white"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
 };
-console.log("auth:", getAuthInfo());
+
 export default Concerts;

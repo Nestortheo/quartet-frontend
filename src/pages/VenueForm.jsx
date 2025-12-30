@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { api } from "../api";
+import { createVenue } from "../api/venues";
 import { useNavigate } from "react-router-dom";
 
 const VenueForm = () => {
@@ -57,11 +57,12 @@ const VenueForm = () => {
             };
 
             console.log("Payload:", payload);
-            const res = await api.post("/venues/", payload);
-            console.log("✅ Venue created:", res.data);
+            //Posting Venue 
+            const created = await createVenue(payload);
+            console.log("✅ Venue created:", created);
 
             setMessage("✅ Venue created successfully!");
-            navigate("/dashboard");
+            navigate(-1);
             // reset inputs
             setName("");
             setCity("");

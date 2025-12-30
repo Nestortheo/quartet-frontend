@@ -1,4 +1,4 @@
-import {api, setTokens, clearTokens } from "./api";
+import {api, setTokens, clearTokens } from "./api/api";
 
 export async function login(username, password) {
   // POST credentials to Django SimpleJWT

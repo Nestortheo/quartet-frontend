@@ -1,8 +1,9 @@
 // src/pages/EditConcertPage.jsx
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { api } from "../api";
+import api from "../api/api";
 import ConcertForm from "../components/ConcertForm";
+import { fetchConcertById, updateConcert } from "../api/concerts";
 
 export default function EditConcertPage() {
   const { id } = useParams();
@@ -18,28 +19,39 @@ export default function EditConcertPage() {
 
   // ✅ Check if concert exists
   useEffect(() => {
-    setLoading(true);
-    setMessage(null);
+    let cancelled = false;
 
-    api.get(`/concerts/${id}/`)
-      .then(({ data }) => {
-        setInitialValues(data);     // it exists
-      })
-      .catch((err) => {
+    (async () => {
+      setLoading(true);
+      setMessage(null);
+
+      try {
+        const data = await fetchConcertById(id);
+        if (!cancelled) setInitialValues(data);
+      } 
+      catch (err) {
+        if (cancelled) return;
         const status = err?.response?.status;
         if (status === 404) setMessage("Concert not found.");
         else if (status === 401) setMessage("Unauthorized. Please log in.");
         else setMessage("Failed to load concert.");
         setInitialValues(null);
-      })
-      .finally(() => setLoading(false));
-  }, [id]);
+      } 
+      finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
 
-  async function updateConcert(payload) {
+    return () => {
+      cancelled = true;
+    };
+}, [id]);
+
+  async function handleUpdate(payload) {
     setMessage(null);
     setSubmitting(true);
     try {
-      await api.put(`/concerts/${id}/`, payload); // .patch if you prefer
+      await updateConcert(id,payload)
       setMessage("✅ Changes saved.");
       setTimeout(() => navigate("/concerts"), 1000);
     } catch (e) {
@@ -70,7 +82,7 @@ export default function EditConcertPage() {
       {/* Using the old prop names so ConcertForm works unchanged */}
       <ConcertForm
         initialValues={initialValues}  // ← prefill
-        onSubmit={updateConcert}        // ← use new alias
+        onSubmit={handleUpdate}        // ← use new alias
         submitting={submitting}
         submitLabel="Save changes"
       />

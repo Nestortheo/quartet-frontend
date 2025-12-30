@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../api";
+import {createConcert} from "../api/concerts"
 import { logout } from "../auth";
 import ConcertForm from "../components/ConcertForm";
 
@@ -14,12 +14,12 @@ export default function CreateConcertPage() {
     navigate("/admin-login");
   }
 
-  async function createConcert(payload) {
+  async function handleCreate(payload) {
     setMessage(null);
     setSubmitting(true);
     try {
-      const { data } = await api.post("/concerts/", payload);
-      console.log("✅ Created:", data);
+      const concert = await createConcert(payload)
+      console.log("✅ Created:", concert);
       setMessage("✅ Concert created!");
       setTimeout(() => navigate("/concerts"), 1500);
       
@@ -46,7 +46,7 @@ export default function CreateConcertPage() {
       )}
       
 
-      <ConcertForm createConcert={createConcert} submitting={submitting} />
+      <ConcertForm onSubmit={handleCreate} submitting={submitting} />
 
       <button onClick={handleLogout} className="text-sm underline">
           Log out

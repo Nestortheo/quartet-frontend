@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {api, setTokens, clearTokens } from "../api";
+import {api, setTokens, clearTokens } from "../api/api";
 
 function TestAuth() {
   const [access, setAccess] = useState("");
