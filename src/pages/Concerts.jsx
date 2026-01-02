@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import api from "../api/api"; // ✅ default import (match your hook)
 import useConcerts from "../hooks/useConcerts"; // ✅ adjust path
 import { deleteConcert } from "../api/concerts";
 import { isAuthenticated } from "../auth";
@@ -12,7 +11,7 @@ const Concerts = () => {
   const { concerts, loading, error, removeConcert } = useConcerts();
   
   // 📅 Date formatter (runs once per render)
-  const fmt = useMemo(
+  const fmtFull = useMemo(
     () =>
       new Intl.DateTimeFormat("en-GB", {
         dateStyle: "full",
@@ -44,91 +43,125 @@ const Concerts = () => {
 
 
   return (
-    <div className="concerts-page">
-      <h1>Concerts</h1>
+    <main className="bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-14">
+        <div className="mb-10 flex items-end justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-semibold text-gray-900">Concerts</h1>
+            <p className="mt-2 text-sm text-gray-600">
+              Dates are updated regularly.
+            </p>
+          </div>
 
-      {concerts.length === 0 ? (
-        <p>No concerts available.</p>
-      ) : (
-        <>
-          {/* Admin action */}
           {isAdmin && (
             <Link
               to="/createConcert"
-              className="inline-block text-sm px-3 py-1 rounded bg-black text-white mb-4"
+              className="items-center rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:opacity-90"
             >
               + Create Concert
             </Link>
           )}
+        </div>
 
-          <ul>
-            {concerts.map((concert) => (
-              <li
-                key={concert.id}
-                className="mb-6 border p-4 rounded-xl shadow"
-              >
-                <h2 className="text-xl font-semibold">
-                  {concert.title || "Untitled Concert"}
-                </h2>
+        {concerts.length === 0 ? (
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 text-sm text-gray-600">
+            No concerts available yet.
+          </div>
+        ) : (
+          <div className="space-y-10">
+            {concerts.map((concert) => {
+              const d = new Date(concert.date_start);
 
-                <p>
-                  <strong>Date:</strong>{" "}
-                  {fmt.format(new Date(concert.date_start))}
-                </p>
+              const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
+              const day = d.toLocaleString("en-US", { day: "2-digit" });
 
-                {Array.isArray(concert.program) &&
-                  concert.program.length > 0 && (
-                    <ul
-                      style={{
-                        marginTop: 4,
-                        paddingLeft: 0,
-                        listStyle: "none",
-                      }}
-                    >
-                      {[...concert.program]
-                        .sort(
-                          (a, b) =>
-                            (a.order ?? 0) - (b.order ?? 0)
-                        )
-                        .map((piece) => (
-                          <li key={piece.id}>
-                            {piece.composer}: {piece.title}
-                          </li>
-                        ))}
-                    </ul>
-                  )}
-                  {/* 
-                    <p className="text-xs text-gray-500">
-                  Auth: {String(isAdmin)}
-                </p>
-                */}
+              // Use your fields if you have them:
+              const city = concert.city || concert.location_city || "";
+              const region = concert.region || concert.state || concert.country || "";
+              const headline = concert.title || [city, region].filter(Boolean).join(", ") || "Concert";
+
+              const venue = concert.venue_detail?.name;
+              const mapUrl = concert.map_url || concert.venue_map_url || "";
+
+              const program = Array.isArray(concert.program) ? [...concert.program] : [];
+              program.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
               
-                {/* Admin-only per concert */}
-                {isAdmin  && (
-                  
-                  <div className="mt-3">
-                    <Link
-                      to={`/concerts/${concert.id}/edit`}
-                      className="inline-block text-sm px-3 py-1 rounded bg-black text-white mr-2"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() =>
-                        handleDelete(concert.id)
-                      }
-                      className="inline-block text-sm px-3 py-1 rounded bg-red-600 text-white"
-                    >
-                      Delete
-                    </button>
+
+              return (
+                <article key={concert.id} className="border-b border-black-200 pb-10">
+                  <div className="flex gap-8">
+                    {/* Date badge */}
+                    <div className="flex h-16 w-16 flex-col items-center justify-center rounded-lg bg-gray-100 text-gray-700">
+                      <div className="text-xs font-semibold tracking-wide">{month}</div>
+                      <div className="text-lg font-semibold leading-none">{day}</div>
+                    </div>
+
+                    {/* Details */}
+                    <div className="flex-1">
+                      <h2 className="text-2xl font-semibold text-gray-900">
+                        {headline}
+                      </h2>
+
+                      <p className="mt-2 text-sm text-gray-600">
+                        {fmtFull.format(d)}
+                      </p>
+
+                      {(venue || mapUrl) && (
+                        <p className="mt-2 text-sm text-gray-700">
+                          {venue}
+                          {mapUrl && (
+                            <>
+                              {" "}
+                              <a
+                                href={mapUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-sky-600 hover:underline"
+                              >
+                                (map)
+                              </a>
+                            </>
+                          )}
+                        </p>
+                      )}
+
+                      {program.length > 0 && (
+                        <ul className="mt-6 space-y-3 text-sm text-gray-800">
+                          {program.map((p) => (
+                            <li key={p.id}>
+                              <span className="font-semibold">{p.composer}:</span>{" "}
+                              <span>{p.title}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {/* Admin controls */}
+                      {isAdmin && (
+                        <div className="mt-6 flex items-center gap-2">
+                          <Link
+                            to={`/concerts/${concert.id}/edit`}
+                            className="inline-flex items-center rounded-lg bg-black px-3 py-1.5 text-sm font-medium text-white hover:opacity-90"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(concert.id)}
+                            className="inline-flex items-center rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:opacity-90"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-    </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </main>
   );
 };
 
