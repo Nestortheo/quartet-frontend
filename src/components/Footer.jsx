@@ -1,45 +1,78 @@
 import { Link } from "react-router-dom";
+import { Instagram, Facebook, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-10">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-          
-          {/* Left */}
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-gray-900">
+    <footer className="mt-20 border-t border-white/10 bg-neutral-950">
+      <div className="mx-auto max-w-7xl px-6 py-14">
+        <div className="grid gap-10 md:grid-cols-3">
+          {/* Brand */}
+          <div>
+            <p className="text-sm tracking-[0.25em] uppercase text-white/90">
               Erinys Quartet
             </p>
-            <p className="text-sm text-gray-600">
-              Vienna-based string quartet · Classical & contemporary repertoire
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
+              Vienna-based string quartet exploring classical repertoire alongside
+              contemporary works.
             </p>
           </div>
 
-          {/* Right */}
-          <nav className="flex flex-wrap gap-4 text-sm text-gray-700">
-            <Link to="/about" className="hover:underline underline-offset-4">
-              About
-            </Link>
-            <Link to="/concerts" className="hover:underline underline-offset-4">
-              Concerts
-            </Link>
-            <Link to="/media" className="hover:underline underline-offset-4">
-              Media
-            </Link>
-            <Link to="/contact" className="hover:underline underline-offset-4">
-              Contact
-            </Link>
-          </nav>
+          {/* Links */}
+          <div>
+            <p className="text-sm font-medium text-white/90">Pages</p>
+            <ul className="mt-4 space-y-2 text-sm text-white/65">
+              <li><Link className="hover:text-white transition" to="/about">About</Link></li>
+              <li><Link className="hover:text-white transition" to="/concerts">Concerts</Link></li>
+              <li><Link className="hover:text-white transition" to="/media">Media</Link></li>
+              <li><Link className="hover:text-white transition" to="/contact">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-sm font-medium text-white/90">Contact</p>
+            <div className="mt-4 space-y-2 text-sm text-white/65">
+              <a
+                className="block hover:text-white transition"
+                href="mailto:erinys.stringquartet@gmail.com"
+              >
+                erinys.stringquartet@gmail.com
+              </a>
+              <div className="mt-4 flex items-center gap-4 text-white/70">
+                <a
+                  href="https://www.instagram.com/erinysquartet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={18} />
+                </a>
+                <a
+                  href="https://facebook.com/erinysquartet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={18} />
+                </a>
+                <a
+                  href="mailto:erinys.stringquartet@gmail.com"
+                  className="hover:text-white transition"
+                  aria-label="Email"
+                >
+                  <Mail size={18} />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom line */}
-        <div className="mt-8 flex flex-col gap-2 border-t border-gray-100 pt-4 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Erinys Quartet</p>
-          <p>
-            Website by{" "}
-            <span className="text-gray-700">Erinys Quartet</span>
-          </p>
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center md:justify-between">
+          <span>© {new Date().getFullYear()} Erinys Quartet. All rights reserved.</span>
+          <span className="text-white/40">Vienna • String Quartet</span>
         </div>
       </div>
     </footer>

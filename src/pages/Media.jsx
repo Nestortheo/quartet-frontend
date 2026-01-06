@@ -23,7 +23,7 @@ const Media = () => {
 ];
 
   return (
-    <main className="bg-white">
+    <main className="bg-white" data-nav-theme ="light">
       <div className="mx-auto max-w-6xl px-4 py-14">
         {/* Header */}
         <h1 className="text-3xl font-semibold text-gray-900">Media</h1>

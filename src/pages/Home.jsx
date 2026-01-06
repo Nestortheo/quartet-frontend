@@ -10,7 +10,10 @@ const Home = () => {
   return (
     <main className="bg-white">
       {/*HERO IMAGE*/}
-      <section className="relative h-[60vh] min-h-[420px] max-h-[680px] overflow-hidden bg-black">
+      <section 
+        id="home-hero"
+        data-nav-theme="dark"
+        className="relative h-[60vh] min-h-[420px] max-h-[680px] overflow-hidden bg-black">
         <img
           src={quartetImg}
           alt="Erinys Quartet"
@@ -63,100 +66,102 @@ const Home = () => {
       </section>
 
       {/*Mini Intro after HERO */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <p className="text-xs uppercase tracking-[0.18em] text-gray-400">
-          Vienna · String Quartet
-        </p>
+      <div data-nav-theme="light">
+        <section  className="mx-auto max-w-6xl px-4 py-16">
+          <p className="text-xs uppercase tracking-[0.18em] text-gray-400">
+            Vienna · String Quartet
+          </p>
 
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700">
-          Erinys Quartet explores classical repertoire alongside contemporary works,
-          shaping programs around contrast, dialogue, and sound identity.
-        </p>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700">
+            Erinys Quartet explores classical repertoire alongside contemporary works,
+            shaping programs around contrast, dialogue, and sound identity.
+          </p>
 
-        <div className="mx-auto mt-10 h-px w-24 bg-gray-200" />
-      </section> 
+          <div className="mx-auto mt-10 h-px w-24 bg-gray-200" />
+        </section> 
 
-      {/* UpcomingConcerts */}
-      <section className="bg-gray-50">
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <UpcomingConcerts />
+        {/* UpcomingConcerts */}
+        <section className="bg-gray-50">
+          <div className="mx-auto max-w-6xl px-4 py-16">
+            <UpcomingConcerts />
+          </div>
+        </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-20">
+        <div className="grid gap-16 md:grid-cols-2 items-stretch">
+          {/* ABOUT */}
+          <div className="flex flex-col h-full">
+            {/* fixed-height intro block */}
+            <div className="min-h-[120px]">
+              <h2 className="text-2xl font-semibold text-gray-900">About the Quartet</h2>
+              <p className="mt-4 text-gray-700">
+                Erinys Quartet explores classical repertoire alongside contemporary works,
+                shaping programs around contrast, dialogue, and sound identity.
+              </p>
+            </div>
+
+            {/* Card */}
+            <div className="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+              <div className="aspect-video bg-gray-100">
+                <img
+                  src={aboutImg}
+                  alt="Erinys Quartet"
+                  className="h-full w-full object-cover block"
+                />
+              </div>
+              <div className="px-4 py-3 min-h-[72px]">
+                <p className="text-sm font-medium text-gray-900">Erinys Quartet</p>
+                <p className="mt-1 text-xs text-gray-500">Vienna • String Quartet</p>
+              </div>
+            </div>
+
+            <Link
+              to="/about"
+              className="mt-auto inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
+            >
+              Read more
+            </Link>
+          </div>
+
+          {/* MEDIA */}
+          <div className="flex flex-col h-full">
+            {/* fixed-height intro block */}
+            <div className="min-h-[120px]">
+              <h2 className="text-2xl font-semibold text-gray-900">Our Media</h2>
+              <p className="mt-4 text-gray-700">
+                Listen to selected recordings and watch performances by Erinys Quartet,
+                featuring works from the classical repertoire alongside contemporary music.
+              </p>
+            </div>
+
+            {/* Card */}
+            <div className="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+              <div className="aspect-video bg-gray-100">
+                <iframe
+                  src="https://www.youtube.com/embed/RYanguk1JRk?start=2"
+                  title="Erinys Quartet performance"
+                  className="h-full w-full block"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+
+              <div className="px-4 py-3 min-h-[72px]">
+                <p className="text-sm font-medium text-gray-900">Performance title</p>
+                <p className="mt-1 text-xs text-gray-500">Venue • City • Year</p>
+              </div>
+            </div>
+
+            <Link
+              to="/media"
+              className="mt-auto inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
+            >
+              Explore media
+            </Link>
+          </div>
         </div>
       </section>
-
-     <section className="mx-auto max-w-6xl px-4 py-20">
-      <div className="grid gap-16 md:grid-cols-2 items-stretch">
-        {/* ABOUT */}
-        <div className="flex flex-col h-full">
-          {/* fixed-height intro block */}
-          <div className="min-h-[120px]">
-            <h2 className="text-2xl font-semibold text-gray-900">About the Quartet</h2>
-            <p className="mt-4 text-gray-700">
-              Erinys Quartet explores classical repertoire alongside contemporary works,
-              shaping programs around contrast, dialogue, and sound identity.
-            </p>
-          </div>
-
-          {/* Card */}
-          <div className="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-            <div className="aspect-video bg-gray-100">
-              <img
-                src={aboutImg}
-                alt="Erinys Quartet"
-                className="h-full w-full object-cover block"
-              />
-            </div>
-            <div className="px-4 py-3 min-h-[72px]">
-              <p className="text-sm font-medium text-gray-900">Erinys Quartet</p>
-              <p className="mt-1 text-xs text-gray-500">Vienna • String Quartet</p>
-            </div>
-          </div>
-
-          <Link
-            to="/about"
-            className="mt-auto inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
-          >
-            Read more
-          </Link>
-        </div>
-
-        {/* MEDIA */}
-        <div className="flex flex-col h-full">
-          {/* fixed-height intro block */}
-          <div className="min-h-[120px]">
-            <h2 className="text-2xl font-semibold text-gray-900">Our Media</h2>
-            <p className="mt-4 text-gray-700">
-              Listen to selected recordings and watch performances by Erinys Quartet,
-              featuring works from the classical repertoire alongside contemporary music.
-            </p>
-          </div>
-
-          {/* Card */}
-          <div className="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-            <div className="aspect-video bg-gray-100">
-              <iframe
-                src="https://www.youtube.com/embed/RYanguk1JRk?start=2"
-                title="Erinys Quartet performance"
-                className="h-full w-full block"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-
-            <div className="px-4 py-3 min-h-[72px]">
-              <p className="text-sm font-medium text-gray-900">Performance title</p>
-              <p className="mt-1 text-xs text-gray-500">Venue • City • Year</p>
-            </div>
-          </div>
-
-          <Link
-            to="/media"
-            className="mt-auto inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
-          >
-            Explore media
-          </Link>
-        </div>
-      </div>
-    </section>
+    </div>
   
   </main>
   )

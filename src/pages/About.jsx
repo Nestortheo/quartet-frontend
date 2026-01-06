@@ -14,7 +14,7 @@ const members = [
 
 const About = () => {
   return (
-    <main>
+    <main data-nav-theme>
       <section className="relative h-[60vh] min-h-[420px] max-h-[680px] overflow-hidden">
         <img
           src={aboutBanner}
