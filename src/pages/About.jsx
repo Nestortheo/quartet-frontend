@@ -23,7 +23,7 @@ const About = () => {
         />
 
         {/* Optional subtle overlay */}
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0" />
 
         {/* Title */}
         <div className="absolute bottom-6 left-6 text-white">
@@ -31,7 +31,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className='py-20 bg-slate-50'>
+      <section className='py-20'>
         <div className="mx-auto max-w-6xl">
           <h2 className='mb-12 text-center text-2xl font-semibold text-gray-900'>
             The Ensemble
@@ -53,7 +53,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-slate-50">
+      <section className="py-20">
           <div className="mx-auto max-w-3xl px-4 space-y-6 text-gray-700 leading-relaxed">
               <p>
               Named for the Erinyes (a.k.a. the Furies) from the Greek tragedy

@@ -5,13 +5,13 @@ import quartetImg from '../assets/_C0A6050-2.jpg'; // ✅ adjust path as needed
 import aboutImg from '../assets/_C0A6131.jpg'
 import UpcomingConcerts from "../components/UpcomingConcerts";
 import { Instagram, Facebook, Mail } from "lucide-react";
+import VideoCardMedia from '../components/VideoCardMedia';
 
 const Home = () => {
   return (
-    <main className="bg-white">
+    <main >
       {/*HERO IMAGE*/}
       <section 
-        id="home-hero"
         data-nav-theme="dark"
         className="relative h-[60vh] min-h-[420px] max-h-[680px] overflow-hidden bg-black">
         <img
@@ -24,7 +24,7 @@ const Home = () => {
         {/* Title strip */}
         <div className="absolute bottom-0 left-0 right-0">
           <div className="mx-auto max-w-6xl px-4 pb-8">
-            <div className="inline-flex flex-col gap-2 rounded-xl bg-black/45 px-5 py-4 text-white backdrop-blur">
+            <div className="inline-flex flex-col gap-2 rounded-xl bg-black/25 px-5 py-4 text-white backdrop-blur">
               <h1 className="text-3xl font-semibold leading-tight">Erinys Quartet</h1>
               <p className="text-sm text-white/85">
                 Vienna-based string quartet • Classical & contemporary repertoire
@@ -77,22 +77,22 @@ const Home = () => {
             shaping programs around contrast, dialogue, and sound identity.
           </p>
 
-          <div className="mx-auto mt-10 h-px w-24 bg-gray-200" />
+          <div className="mx-auto mt-10 h-px w-24 bg-black/10" />
         </section> 
 
         {/* UpcomingConcerts */}
-        <section className="bg-gray-50">
-          <div className="mx-auto max-w-6xl px-4 py-16">
+        <section>
+          <div className="mx-auto max-w-6xl px-4 py-14">
             <UpcomingConcerts />
           </div>
         </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20">
+      <section className="mx-auto max-w-6xl px-4 py-24">
         <div className="grid gap-16 md:grid-cols-2 items-stretch">
           {/* ABOUT */}
           <div className="flex flex-col h-full">
             {/* fixed-height intro block */}
-            <div className="min-h-[120px]">
+            <div className="h-[140px]">
               <h2 className="text-2xl font-semibold text-gray-900">About the Quartet</h2>
               <p className="mt-4 text-gray-700">
                 Erinys Quartet explores classical repertoire alongside contemporary works,
@@ -100,24 +100,26 @@ const Home = () => {
               </p>
             </div>
 
-            {/* Card */}
-            <div className="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-              <div className="aspect-video bg-gray-100">
+            {/* card slot (same height as media) */}
+            <div className="mt-8 h-[360px] overflow-hidden rounded-xl border border-black/10 bg-white/10 shadow-sm backdrop-blur">
+              <div className="aspect-video">
                 <img
                   src={aboutImg}
                   alt="Erinys Quartet"
                   className="h-full w-full object-cover block"
                 />
               </div>
-              <div className="px-4 py-3 min-h-[72px]">
-                <p className="text-sm font-medium text-gray-900">Erinys Quartet</p>
-                <p className="mt-1 text-xs text-gray-500">Vienna • String Quartet</p>
+
+              {/* match VideoCardMedia meta spacing */}
+              <div className="p-4 min-h-[72px]">
+                <p className="text-sm font-semibold text-gray-900">Erinys Quartet</p>
+                <p className="mt-1 text-sm text-gray-600">Vienna • String Quartet</p>
               </div>
             </div>
 
             <Link
               to="/about"
-              className="mt-auto inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
+              className="mt-2 inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
             >
               Read more
             </Link>
@@ -126,7 +128,7 @@ const Home = () => {
           {/* MEDIA */}
           <div className="flex flex-col h-full">
             {/* fixed-height intro block */}
-            <div className="min-h-[120px]">
+            <div className="h-[140px]">
               <h2 className="text-2xl font-semibold text-gray-900">Our Media</h2>
               <p className="mt-4 text-gray-700">
                 Listen to selected recordings and watch performances by Erinys Quartet,
@@ -134,27 +136,22 @@ const Home = () => {
               </p>
             </div>
 
-            {/* Card */}
-            <div className="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-              <div className="aspect-video bg-gray-100">
-                <iframe
-                  src="https://www.youtube.com/embed/RYanguk1JRk?start=2"
-                  title="Erinys Quartet performance"
-                  className="h-full w-full block"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              </div>
-
-              <div className="px-4 py-3 min-h-[72px]">
-                <p className="text-sm font-medium text-gray-900">Performance title</p>
-                <p className="mt-1 text-xs text-gray-500">Venue • City • Year</p>
-              </div>
+            {/* card slot (same height as about) */}
+            <div className="mt-8 h-[360px]">
+              <VideoCardMedia
+                className="h-full"
+                video={{
+                  title: "Performance title",
+                  subtitle: "Venue • City • Year",
+                  url: "https://www.youtube.com/embed/RYanguk1JRk?start=2",
+                }}
+                showMeta={true}
+              />
             </div>
 
             <Link
               to="/media"
-              className="mt-auto inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
+              className="mt-2 inline-block w-fit rounded-xl border border-gray-900 px-6 py-3 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition"
             >
               Explore media
             </Link>

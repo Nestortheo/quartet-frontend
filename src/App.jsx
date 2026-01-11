@@ -19,9 +19,24 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <MyNavbar />
-      <main className="flex-1">
+<div className="min-h-screen flex flex-col">
+  <MyNavbar />
+
+  {/* PAGE BACKGROUND (not header) */}
+<main className="relative flex-1 overflow-hidden bg-[#f1ece6]">
+  <div className="pointer-events-none absolute inset-0">
+      <div
+        className="absolute inset-0 bg-gradient-to-br
+          from-[#d6cfc7]
+          via-[#efe8e1]
+          to-[#f5f1ec]"
+      />
+      <div className="absolute top-1/4 -left-48 h-[800px] w-[800px] rounded-full bg-[#e2cbb4]/35 blur-3xl" />
+      <div className="absolute bottom-0 -right-48 h-[700px] w-[700px] rounded-full bg-[#d1bfae]/30 blur-3xl" />
+    </div>
+
+    {/* Page content */}
+    <div className="relative z-10 h-full">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -33,7 +48,7 @@ const App = () => {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/concerts/:id" element={<ConcertDetail />} />
-        
+
         <Route
           path="/createConcert"
           element={
@@ -42,8 +57,9 @@ const App = () => {
             </RequireAuth>
           }
         />
+
         <Route
-           path="/concerts/:id/edit"
+          path="/concerts/:id/edit"
           element={
             <RequireAuth>
               <EditConcertPage />
@@ -59,10 +75,12 @@ const App = () => {
             </RequireAuth>
           }
         />
-        </Routes>
-        </main>
-        <Footer />
+      </Routes>
     </div>
+  </main>
+
+  <Footer />
+</div>
   );
 };
 

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from "react";
 import photo1 from "../assets/1.png";
 import photo2 from "../assets/2.png";
 import photo3 from "../assets/3.jpg";
 import photo4 from "../assets/HomeImage.png"
 import photo5 from "../assets/_C0A6131.jpg"
-
+import mediaHero from "../assets/3.jpg"; // adjust path
+import VideoCardMedia from "../components/VideoCardMedia";
 
 
 const Media = () => {
@@ -23,39 +24,36 @@ const Media = () => {
 ];
 
   return (
-    <main className="bg-white" data-nav-theme ="light">
+    <main>
       <div className="mx-auto max-w-6xl px-4 py-14">
-        {/* Header */}
-        <h1 className="text-3xl font-semibold text-gray-900">Media</h1>
-        <p className="mt-2 text-sm text-gray-600">
-          Videos, photos, recordings, and press material.
-        </p>
+        {/*Hero Image */}
+        <section className="relative mb-10 overflow-hidden rounded-3xl border border-black/5">
+          <img
+            src={mediaHero}
+            alt="Erinys Quartet — Media"
+            className="h-44 w-full object-cover md:h-85"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/30 to-transparent" />
+
+          <div className="absolute inset-0 flex items-end">
+            <div className="p-6 md:p-8">
+              <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">
+                Media
+              </h1>
+              <p className="mt-1 text-sm text-white/80">
+                Videos, photos, recordings, and press material.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* VIDEOS */}
         <section className="mt-12">
               <h2 className="text-xl font-semibold text-gray-900">Videos</h2>
               <div className="grid gap-8 lg:grid-cols-2">
-                {videos.map((video) => (
-                  <article key={video.id}>
-                    <div className="aspect-video">
-                      <iframe
-                        className="h-full w-full rounded-xl"
-                        src={video.url}
-                        title={video.title}
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                    <div className="p-4">
-                      <div className="text-sm font-semibold text-gray-900">{video.title}</div>
-                      {video.subtitle && ( 
-                        <div className="mt-1 text-sm text-gray-600">{video.subtitle}</div>
-                      )}
-                      
-                    </div>
-                  </article>
-                ))}
+              {videos.map((video) => (
+                <VideoCardMedia key={video.id} video={video} />
+              ))}
              </div>       
         </section>
 

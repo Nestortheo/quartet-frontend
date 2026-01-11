@@ -1,51 +1,28 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation} from "react-router-dom";
-
-import useNavTheme from "../hooks/useNavTheme";
-
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 export default function MyNavbar() {
   const [open, setOpen] = useState(false);
 
-  // ✅ stays dark for the ENTIRE dark banner/hero section
-  const { pathname } = useLocation();   // ✅ reactive
-  const isHome = pathname === "/";
+  const linkBase =
+    "block px-3 py-2 text-sm md:text-[15px] rounded-md transition-colors duration-200 hover:text-gray-900";
 
-  const scrolledDark = useNavTheme(90);
-  const isDark = isHome ? true : scrolledDark;
-
-  
-
-  const headerText = isDark ? "text-white/90" : "text-gray-900";
-  const navText = isDark ? "text-white/70" : "text-gray-700";
-  const navHover = isDark ? "hover:text-white" : "hover:text-gray-900";
-
-  const linkBase = `block px-3 py-2 text-sm md:text-[15px] rounded-md transition-colors duration-300 ease-out ${navHover}`;
-  const linkActive = isDark
-    ? "text-white font-medium"
-    : "text-gray-900 font-medium";
-
-  const headerBg = isDark
-    ? "bg-neutral-800/50"
-    : "bg-white/70 border-b border-black/10";
-
+  const linkActive = "text-black font-medium";
 
   return (
     <header className="sticky top-0 z-50">
-      <div
-        className={`backdrop-blur-md will-change-[background-color] transition-[background-color,border-color] duration-300 ease-out ${headerBg}`}
-      >
-        <nav className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
+      <div className="bg-[#eceae7]/90 backdrop-blur-md border-b border-black/5">
+        <nav className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
+          {/* Logo */}
           <Link
             to="/"
-            className={`text-lg font-medium tracking-widest uppercase transition-colors duration-300 ease-out ${headerText}`}
+            className="text-lg font-medium tracking-widest uppercase text-gray-900"
           >
             Erinys Quartet
           </Link>
 
-          <ul
-            className={`hidden md:flex items-center gap-6 transition-colors duration-300 ease-out ${navText}`}
-          >
+          {/* Desktop nav */}
+          <ul className="hidden md:flex items-center gap-6 text-gray-700">
             {[
               ["About", "/about"],
               ["Concerts", "/concerts"],
@@ -65,12 +42,9 @@ export default function MyNavbar() {
             ))}
           </ul>
 
+          {/* Mobile button */}
           <button
-            className={`md:hidden inline-flex items-center justify-center rounded-md p-2 transition ${
-              isDark
-                ? "hover:bg-white/10 text-white/90"
-                : "hover:bg-black/5 text-gray-900"
-            }`}
+            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-900 hover:bg-black/5 transition"
             aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
@@ -90,6 +64,7 @@ export default function MyNavbar() {
                 strokeLinecap="round"
               />
             </svg>
+
             {/* close */}
             <svg
               className={`${open ? "block" : "hidden"}`}
@@ -109,8 +84,9 @@ export default function MyNavbar() {
         </nav>
       </div>
 
+      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-black/10 bg-white/95 backdrop-blur">
+        <div className="md:hidden bg-white">
           <div className="mx-auto max-w-7xl px-6 py-3 space-y-1 text-gray-700">
             {[
               ["About", "/about"],
