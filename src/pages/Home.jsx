@@ -66,8 +66,8 @@ const Home = () => {
       </section>
 
       {/*Mini Intro after HERO */}
-      <div data-nav-theme="light">
-        <section  className="mx-auto max-w-6xl px-4 py-16">
+      <div data-nav-theme="light" className="py-16 md:py-20">
+        <section  className="mx-auto max-w-6xl px-4 ">
           <p className="text-xs uppercase tracking-[0.18em] text-gray-400">
             Vienna · String Quartet
           </p>
@@ -77,17 +77,17 @@ const Home = () => {
             shaping programs around contrast, dialogue, and sound identity.
           </p>
 
-          <div className="mx-auto mt-10 h-px w-24 bg-black/10" />
+          <div className="mx-auto mt-18 h-px w-20 bg-black/10" />
         </section> 
 
         {/* UpcomingConcerts */}
         <section>
-          <div className="mx-auto max-w-6xl px-4 py-14">
+          <div className=" mx-auto max-w-6xl px-4 py-12 mt-12 md:mt-16">
             <UpcomingConcerts />
           </div>
         </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-24">
+      <section className="mx-auto max-w-6xl px-4 py-20">
         <div className="grid gap-16 md:grid-cols-2 items-stretch">
           {/* ABOUT */}
           <div className="flex flex-col h-full">

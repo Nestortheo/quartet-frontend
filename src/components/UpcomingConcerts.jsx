@@ -94,23 +94,22 @@ const UpcomingConcerts = ({limit = 3}) => {
 
     
     return(
-        <section className="mx-auto max-w-7xl px-4 py-10">
-
+        <section>
             {/* Header */}
            <div className="w-full max-w-4xl flex items-end justify-between gap-6">
             <div className="border-l-2 border-neutral-900/50 pl-4">
                     <h2 className="text-3xl font-semibold tracking-tight text-neutral-700">
-                    Upcoming concerts
+                        Upcoming concerts
                     </h2>
                     <p className="mt-1 text-sm text-neutral-600">
-                    Dates are updated regularly.
+                        Dates are updated regularly.
                     </p>
                 </div>
 
                 <Link
                     to="/concerts"
                     className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-neutral-700 transition"
-                >
+                    >
                     View all
                     <span className="transition group-hover:translate-x-0.5" aria-hidden>
                     →
@@ -119,17 +118,17 @@ const UpcomingConcerts = ({limit = 3}) => {
             </div>
 
             {loading && (
-            <div className="rounded-2xl border border-gray-200  p-6 text-sm text-gray-600">
+            <div className="mt-6 rounded-2xl border border-gray-200  p-6 text-sm text-gray-600">
                 Loading concerts…
             </div>
             )}
             {!loading && error && (
-            <div className="rounded-2xl border border-red-200  p-6 text-sm text-red-700">
+            <div className="mt-6 rounded-2xl border border-red-200  p-6 text-sm text-red-700">
                 {error}
             </div>
             )}
             {!loading && !error && upcoming.length === 0 && (
-            <div className="rounded-2xl border border-gray-200  p-6 text-sm text-gray-600">
+            <div className="mt-6 rounded-2xl border border-gray-200  p-6 text-sm text-gray-600">
                 No upcoming concerts yet.
             </div>
             )}

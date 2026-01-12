@@ -16,6 +16,7 @@ import Practice from './pages/Practice.jsx';
 import EditConcertPage from './pages/EditConcertPage.jsx';
 import ConcertDetail from "./pages/ConcertDetail.jsx";
 import Footer from "./components/Footer";
+import PracticePage from './pages/PracticePage.jsx';
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/concerts/:id" element={<ConcertDetail />} />
+        <Route path="/testpage/" element={<PracticePage/>} />
 
         <Route
           path="/createConcert"
