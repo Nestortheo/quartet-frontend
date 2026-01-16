@@ -2,8 +2,11 @@ import quartetImg from '../assets/_C0A6050-2.jpg';
 import {Link} from 'react-router-dom'
 import leftImg from '../assets/1.png'
 import rightImg from '../assets/2.png'
+import useConcerts from "../hooks/useConcerts"; // ✅ adjust path
+
 
 export default function PracticePage(){
+    const { concerts, loading, error, removeConcert } = useConcerts();
 
     return(
         <main> {/*Main exists for structuring purposes of a whole page */}
@@ -68,6 +71,47 @@ export default function PracticePage(){
 
                     </div>
               </div>
+            </section>
+            {/* DRILL 3---> Show Date top left, and concert.title , concert.venue + a view button */}
+            <section className="mx-auto max-w-5xl">
+                
+                {concerts?.map((concert) => {
+                    const d = new Date(concert.date_start);
+
+                    const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
+                    const day = d.toLocaleString("en-US", { day: "2-digit" });
+
+                    return(
+                    <div key={concert.id} className = "border-b border-black/25 pb-10">
+                        
+                        <div className="border flex flex-col items-center gap-4 md:flex-row  md:gap-8">
+                            {/* DATE */}
+                            <div className="flex h-16 w-16 flex-col items-center justify-center rounded-xl bg-black/5 text-gray-800">
+                                <span className="text-sm font-semibold leading-none">{day}</span>
+                                <span className="text-xs font-medium leading-none">{month}</span>
+                            </div>
+
+                            {/* INFO */}
+                            <div className="flex flex-1 flex-col items-center md:items-start">
+                                <h2 className="font-medium ">{concert.title}</h2>
+                                <p className="mt-1 text-sm text-gray-700">
+                                {concert.venue_detail.name}
+                                </p>
+                            </div>
+
+                            {/* ACTION */}
+                            <Link
+                                to={`/concerts/${concert.id}`}
+                                className="self-center md:self-auto md:ml-auto inline-flex items-center justify-center rounded-lg border border-black/15 bg-white/70 px-3 py-2 text-sm font-medium hover:bg-white"
+                            >
+                                View
+                            </Link>
+                            </div>
+                    </div>
+                    );
+                })}
+
+                
             </section>
         </main>
     )

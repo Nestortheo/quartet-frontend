@@ -25,7 +25,7 @@ const Media = () => {
 
   return (
     <main>
-      <div className="mx-auto max-w-6xl px-4 py-14">
+      <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         {/*Hero Image */}
         <section className="relative mb-10 overflow-hidden rounded-3xl border border-black/5">
           <img
@@ -48,8 +48,8 @@ const Media = () => {
         </section>
 
         {/* VIDEOS */}
-        <section className="mt-12">
-              <h2 className="text-xl font-semibold text-gray-900">Videos</h2>
+        <section className="mt-10">
+              <h2 className="text-2xl font-semibold text-gray-900">Videos</h2>
               <div className="grid gap-8 lg:grid-cols-2">
               {videos.map((video) => (
                 <VideoCardMedia key={video.id} video={video} />
@@ -59,9 +59,9 @@ const Media = () => {
 
         {/* PHOTOS */}
         {/* PHOTOS */}
-        <section className="mt-16">
+        <section className="mt-10">
           <div className="mb-5">
-            <h2 className="text-xl font-semibold text-gray-900">Photos</h2>
+            <h2 className="text-2xl font-semibold text-gray-900">Photos</h2>
             <p className="mt-1 text-sm text-gray-600">
               Selected images from concerts and sessions.
             </p>

@@ -45,7 +45,7 @@ const Concerts = () => {
 
 return (
   <main>
-    <div className="mx-auto max-w-6xl px-4 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/*Hero Image */}
       <section className="relative mb-10 overflow-hidden rounded-3xl border border-black/5">
           <img
@@ -102,7 +102,7 @@ return (
               "Concert";
 
             const venue = concert.venue_detail?.name;
-            const mapUrl = concert.map_url || concert.venue_map_url || "";
+            const mapUrl =concert.venue_detail.map_link || "";
 
             const program = Array.isArray(concert.program)
               ? [...concert.program]
@@ -124,33 +124,47 @@ return (
 
                   {/* Details */}
                   <div className="flex-1">
+                    <Link
+                      to = {`/concerts/${concert.id}`}
+                    >
                     <h2 className="text-2xl font-semibold text-gray-900">
                       {headline}
                     </h2>
-
+                    </Link>
                     <p className="mt-2 text-sm text-gray-600">
                       {fmtFull.format(d)}
                     </p>
 
                     {(venue || mapUrl) && (
-                      <p className="mt-2 text-sm text-gray-700">
-                        {venue}
-                        {mapUrl && (
-                          <>
-                            {" "}
-                            <a
-                              href={mapUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="text-sky-700 hover:underline"
-                            >
-                              (map)
-                            </a>
-                          </>
-                        )}
-                      </p>
-                    )}
+                    <div className="mt-2 space-y-1 text-sm text-gray-700">
+                      {venue && (
+                        <div className="font-medium text-gray-800">
+                          {venue}
+                        </div>
+                      )}
 
+                      {(concert.venue_detail?.address || mapUrl) && (
+                        <div className="text-gray-600">
+                          
+                          <div>
+                            {mapUrl && (
+                              <>
+                                {" "}
+                                <a
+                                  href={mapUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-gray-900 underline underline-offset-4 hover:text-gray-700"
+                                >
+                                  (View Address)
+                                </a>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                     {program.length > 0 && (
                       <ul className="mt-6 space-y-3 text-sm text-gray-800">
                         {program.map((p) => (
@@ -161,6 +175,34 @@ return (
                         ))}
                       </ul>
                     )}
+                    {/*Ticket Info */}
+                    <div className="mt-6 flex flex-wrap items-center gap-3">
+                    {/* Ticket */}
+                    {concert.ticket_link && (
+                      <a
+                        href={concert.ticket_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center rounded-xl
+                                  bg-gray-900 px-5 py-2
+                                  text-sm font-medium text-white
+                                  transition hover:bg-gray-800"
+                      >
+                        Ticket
+                      </a>
+                    )}
+
+                    {/* View Event */}
+                    <Link
+                      to={`/concerts/${concert.id}`}
+                      className="inline-flex items-center rounded-xl
+                                border border-gray-900/20 px-5 py-2
+                                text-sm font-medium text-gray-900
+                                transition hover:bg-gray-900 hover:text-white"
+                    >
+                      View Event
+                    </Link>
+                  </div>
 
                     {/* Admin controls */}
                     {isAdmin && (

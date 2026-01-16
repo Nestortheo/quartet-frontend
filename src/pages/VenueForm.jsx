@@ -26,9 +26,15 @@ const VenueForm = () => {
         }
 
     function makeMapsUrl(address, city) {
-        const q = encodeURIComponent([address, city].filter(Boolean).join(", "));
-        return `https://www.google.com/maps?q=${q}`;
-        }
+        const query = [address, city]
+            .filter(Boolean)
+            .join(", ")
+            .trim();
+
+        if (!query) return "";
+
+        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    }
 
     async function handleVenueSubmit(e)  {
         
@@ -72,16 +78,20 @@ const VenueForm = () => {
 
         }catch (err) {
             console.error("❌ Error creating venue:", err);
-            setMessage("❌ Failed to create venue");
-        } finally {
-            setSubmitting(false);
-        }
 
+            const data = err?.response?.data;
 
-
+            if (data) {
+                console.log("DRF error data:", data);
+                // show first useful message
+                const firstKey = Object.keys(data)[0];
+                const firstMsg = Array.isArray(data[firstKey]) ? data[firstKey][0] : data[firstKey];
+                setMessage(`${firstKey}: ${firstMsg}`);
+            } else {
+                setMessage("❌ Failed to create venue");
+            }
     }
-
-    
+  }    
 
 
  return(
@@ -106,12 +116,12 @@ const VenueForm = () => {
             />
             
         <div className="flex flex-col space-y-1"></div>
-            <label className="text-sm font-medium">Adress</label>
+            <label className="text-sm font-medium">Address</label>
             <input
                 value = {address}
                 onChange = {(e) => setAddress(e.target.value)}
                 className="border p-2 w-full rounded"
-                placeholder="Adress"
+                placeholder="Address"
             />
             
         <div className="flex flex-col space-y-1">

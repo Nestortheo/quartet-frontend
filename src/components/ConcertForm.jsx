@@ -23,10 +23,19 @@ export default function ConcertForm({
     program: [{ composer: "", title: "", order: 1 }],
   });
 
+
+
   // ---- Venues ----------------------------------------------
   const [venues, setVenues] = useState([]);
   const [venuesLoading, setVenuesLoading] = useState(true);
   const [venuesError, setVenuesError] = useState(null);
+  //For Edit Venue
+  const [venueForm, setVenueForm] = useState({
+    name: "",
+    city: "",
+    address: "",
+    map_link: "",
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -91,6 +100,18 @@ export default function ConcertForm({
           : [{ composer: "", title: "", order: 1 }],
     }));
   }, [initialValues]);
+
+  //Prefill for Venue edit
+  useEffect(() => {
+  if (!initialValues) return;
+
+  setVenueForm({
+    name: initialValues.venue_detail?.name ?? "",
+    city: initialValues.venue_detail?.city ?? "",
+    address: initialValues.venue_detail?.address ?? "",
+    map_link: initialValues.venue_detail?.map_link ?? "",
+  });
+}, [initialValues]);
 
   // ---- Local error just for the form’s own validation ------
   const [localError, setLocalError] = useState(null);
@@ -161,8 +182,31 @@ export default function ConcertForm({
       event_link: form.event_link || "",
       is_public: !!form.is_public,
       program: cleanedProgram,
-    };
 
+      ...(initialValues ? {
+        venue_update: {
+          name: venueForm.name.trim(),
+          city: venueForm.city.trim(),
+          address: venueForm.address.trim(),
+          map_link: venueForm.map_link.trim(),
+        }
+      } : {}),
+      
+    };
+    // Safety: if venue changed, don't update venue fields
+    const initialVenueId =
+      typeof initialValues?.venue === "object"
+        ? String(initialValues?.venue?.id ?? "")
+        : String(initialValues?.venue ?? "");
+
+    if (initialVenueId && String(form.venueId) !== initialVenueId) {
+      delete payload.venue_update;
+    }
+
+    // OPTIONAL: omit empty map_link (only if you DON'T want to clear it)
+    if (payload.venue_update && !payload.venue_update.map_link) {
+      delete payload.venue_update.map_link;
+    }
     //onSubmit is either create or edit based on which component calls this
     onSubmit?.(payload);
   }
@@ -233,7 +277,46 @@ export default function ConcertForm({
             </option>
           ))}
         </select>
-      </div>
+
+        {/* ✅ Venue edit (updates current venue) */}
+        {initialValues && (
+          <div className="mt-4 rounded-xl border border-black/10 bg-black/5 p-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold">Edit venue details</h3>
+              <span className="text-xs text-gray-600">
+                Applies to all concerts using this venue
+              </span>
+            </div>
+
+            <div className="mt-3 grid gap-2">
+              <input
+                className="border p-2 w-full rounded text-sm"
+                value={venueForm.name}
+                onChange={(e) => setVenueForm((v) => ({ ...v, name: e.target.value }))}
+                placeholder="Venue name"
+              />
+              <input
+                className="border p-2 w-full rounded text-sm"
+                value={venueForm.city}
+                onChange={(e) => setVenueForm((v) => ({ ...v, city: e.target.value }))}
+                placeholder="City"
+              />
+              <input
+                className="border p-2 w-full rounded text-sm"
+                value={venueForm.address}
+                onChange={(e) => setVenueForm((v) => ({ ...v, address: e.target.value }))}
+                placeholder="Address"
+              />
+              <input
+                className="border p-2 w-full rounded text-sm"
+                value={venueForm.map_link}
+                onChange={(e) => setVenueForm((v) => ({ ...v, map_link: e.target.value }))}
+                placeholder="Map link"
+              />
+            </div>
+          </div>
+        )}
+        </div>
 
       {/* Links & visibility */}
       <div className="space-y-1">

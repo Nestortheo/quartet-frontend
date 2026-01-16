@@ -1,78 +1,71 @@
-import { Link } from "react-router-dom";
-import { Instagram, Facebook, Mail } from "lucide-react";
+import { Instagram, Facebook, Mail, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className=" border-t border-white/10 bg-neutral-950">
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid gap-10 md:grid-cols-3">
+    <footer className="border-t border-white/10 bg-black/80 text-white/70">
+      <div className="mx-auto max-w-6xl px-6 py-8">
+        <div className="flex flex-col items-center text-center gap-4">
           {/* Brand */}
-          <div>
-            <p className="text-sm tracking-[0.25em] uppercase text-white/90">
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.35em] text-white/85">
               Erinys Quartet
             </p>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
-              Vienna-based string quartet exploring classical repertoire alongside
-              contemporary works.
-            </p>
-          </div>
-
-          {/* Links */}
-          <div>
-            <p className="text-sm font-medium text-white/90">Pages</p>
-            <ul className="mt-4 space-y-2 text-sm text-white/65">
-              <li><Link className="hover:text-white transition" to="/about">About</Link></li>
-              <li><Link className="hover:text-white transition" to="/concerts">Concerts</Link></li>
-              <li><Link className="hover:text-white transition" to="/media">Media</Link></li>
-              <li><Link className="hover:text-white transition" to="/contact">Contact</Link></li>
-            </ul>
+            <p className="text-xs text-white/50">Vienna • String Quartet</p>
           </div>
 
           {/* Contact */}
-          <div>
-            <p className="text-sm font-medium text-white/90">Contact</p>
-            <div className="mt-4 space-y-2 text-sm text-white/65">
-              <a
-                className="block hover:text-white transition"
-                href="mailto:erinys.stringquartet@gmail.com"
-              >
-                erinys.stringquartet@gmail.com
-              </a>
-              <div className="mt-4 flex items-center gap-4 text-white/70">
-                <a
-                  href="https://www.instagram.com/erinysquartet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={18} />
-                </a>
-                <a
-                  href="https://facebook.com/erinysquartet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={18} />
-                </a>
-                <a
-                  href="mailto:erinys.stringquartet@gmail.com"
-                  className="hover:text-white transition"
-                  aria-label="Email"
-                >
-                  <Mail size={18} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+          <a
+            className="text-sm text-white/65 hover:text-white transition"
+            href="mailto:erinys.stringquartet@gmail.com"
+          >
+            erinys.stringquartet@gmail.com
+          </a>
 
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} Erinys Quartet. All rights reserved.</span>
-          <span className="text-white/40">Vienna • String Quartet</span>
+          {/* Socials */}
+          <div className="flex items-center justify-center gap-5 text-white/60">
+            <a
+              href="https://www.instagram.com/erinysquartet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+              aria-label="Instagram"
+            >
+              <Instagram size={28} />
+            </a>
+
+            <a
+              href="https://facebook.com/erinysquartet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+              aria-label="Facebook"
+            >
+              <Facebook size={28} />
+            </a>
+
+            <a
+              href="https://www.youtube.com/@erinysquartet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+              aria-label="YouTube"
+            >
+              <Youtube size={28} />
+            </a>
+
+            <a
+              href="mailto:erinys.stringquartet@gmail.com"
+              className="hover:text-white transition"
+              aria-label="Email"
+            >
+              <Mail size={28} />
+            </a>
+          </div>
+
+          {/* Bottom */}
+          <div className="w-full border-t border-white/10 pt-3 text-xs text-white/45">
+            © {new Date().getFullYear()} Erinys Quartet. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
