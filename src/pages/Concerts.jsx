@@ -1,15 +1,53 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState} from "react";
 import useConcerts from "../hooks/useConcerts"; // ✅ adjust path
 import { deleteConcert } from "../api/concerts";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import mediaHero from "../assets/2.png"; // adjust path
+import ConcertRow from "../components/ConcertRow"
+
+const PAST_LIMIT = 6;
 
 const Concerts = () => {
 
   
   const isAdmin = isAuthenticated()
   const { concerts, loading, error, removeConcert } = useConcerts();
+
+  //show more past concerts if the user wants.
+  const [showAllPast, setShowAllPast] = useState(false);
+
+  // “Completed” = 1 day after the event start date
+  const isPastConcert = (dateStartIso) => {
+    const start = new Date(dateStartIso);
+    const cutoff = new Date(start);
+    cutoff.setDate(cutoff.getDate() + 1);
+    return new Date() >= cutoff;
+  };
+
+  const { upcomingConcerts, pastConcerts } = useMemo(() => {
+    const upcoming = [];
+    const past = [];
+
+    for (const c of concerts) {
+      if (isPastConcert(c.date_start)) past.push(c);
+      else upcoming.push(c);
+    }
+
+    // upcoming: soonest first
+    upcoming.sort((a, b) => new Date(a.date_start) - new Date(b.date_start));
+    // past: most recent first
+    past.sort((a, b) => new Date(b.date_start) - new Date(a.date_start));
+
+    return { upcomingConcerts: upcoming, pastConcerts: past };
+  }, [concerts]);
+
+  const visiblePastConcerts = useMemo(() => {
+    return showAllPast ? pastConcerts : pastConcerts.slice(0,PAST_LIMIT)
+  },[pastConcerts, showAllPast]);
+
+   const hasMorePast = pastConcerts.length > PAST_LIMIT;
+
   
   // 📅 Date formatter (runs once per render)
   const fmtFull = useMemo(
@@ -21,6 +59,7 @@ const Concerts = () => {
       }),
     []
   );
+
  {/*Fetching concerts and removeConcert are called from useConcerts,
   I DID THIS CAUSE I WANTED TO FETCH AGAIN CONCERTS FOR THE HOME
   SO I DONT WRITE CODE TO FETCH TWICE THE CONCERTS */}
@@ -79,155 +118,72 @@ return (
         )}
       </div>
 
-      {concerts.length === 0 ? (
-        <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
-          No concerts available yet.
-        </div>
-      ) : (
-        <div className="space-y-10">
-          {concerts.map((concert) => {
-            const d = new Date(concert.date_start);
-
-            const month = d
-              .toLocaleString("en-US", { month: "short" })
-              .toUpperCase();
-            const day = d.toLocaleString("en-US", { day: "2-digit" });
-
-            const city = concert.city || concert.location_city || "";
-            const region =
-              concert.region || concert.state || concert.country || "";
-            const headline =
-              concert.title ||
-              [city, region].filter(Boolean).join(", ") ||
-              "Concert";
-
-            const venue = concert.venue_detail?.name;
-            const mapUrl =concert.venue_detail.map_link || "";
-
-            const program = Array.isArray(concert.program)
-              ? [...concert.program]
-              : [];
-            program.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-
-            return (
-              <article key={concert.id} className="border-b border-black/10 pb-10">
-                <div className="flex gap-8">
-                  {/* Date badge */}
-                  <div className="flex h-16 w-16 flex-col items-center justify-center rounded-xl bg-black/5 text-gray-800">
-                    <div className="text-[11px] font-semibold tracking-widest text-gray-600">
-                      {month}
-                    </div>
-                    <div className="text-xl font-semibold leading-none">
-                      {day}
+     {concerts.length === 0 ? (
+          <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
+            No concerts available yet.
+          </div>
+        ) : (
+          <div className="space-y-10">
+            {/* UPCOMING */}
+            {upcomingConcerts.length === 0 ? (
+              <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
+                No upcoming concerts right now.
+              </div>
+            ) : (
+              <div className="space-y-10">
+                {upcomingConcerts.map((concert) => (
+                  <ConcertRow
+                    key={concert.id}
+                    concert={concert}
+                    fmtFull={fmtFull}
+                    isAdmin={isAdmin}
+                    handleDelete={handleDelete}
+                    variant="upcoming"
+                  />
+                ))}
+              </div>
+            )}
+           
+            {/* PAST (collapsible) && limitied to 8 && showAllPast */}
+            {pastConcerts.length > 0 && (
+              <section className="pt-2">
+                  <div className="mb-6 flex items-end justify-between gap-4">
+                    <div>
+                      <h3 className="text-sm font-semibold text-gray-900">
+                        Past concerts
+                      </h3>
+                      <span className="text-xs text-gray-600">
+                        {pastConcerts.length} completed
+                      </span>
                     </div>
                   </div>
-
-                  {/* Details */}
-                  <div className="flex-1">
-                    <Link
-                      to = {`/concerts/${concert.id}`}
-                    >
-                    <h2 className="text-2xl font-semibold text-gray-900">
-                      {headline}
-                    </h2>
-                    </Link>
-                    <p className="mt-2 text-sm text-gray-600">
-                      {fmtFull.format(d)}
-                    </p>
-
-                    {(venue || mapUrl) && (
-                    <div className="mt-2 space-y-1 text-sm text-gray-700">
-                      {venue && (
-                        <div className="font-medium text-gray-800">
-                          {venue}
-                        </div>
-                      )}
-
-                      {(concert.venue_detail?.address || mapUrl) && (
-                        <div className="text-gray-600">
-                          
-                          <div>
-                            {mapUrl && (
-                              <>
-                                {" "}
-                                <a
-                                  href={mapUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-gray-900 underline underline-offset-4 hover:text-gray-700"
-                                >
-                                  (View Address)
-                                </a>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      )}
+                  <div className="mt-6 space-y-10">
+                    {visiblePastConcerts.map((concert) => (
+                      <ConcertRow
+                        key={concert.id}
+                        concert={concert}
+                        fmtFull={fmtFull}
+                        isAdmin={isAdmin}
+                        handleDelete={handleDelete}
+                        variant="past"
+                      />
+                    ))}
+                  </div>
+                  {hasMorePast && (
+                    <div className="pt-6 text-center">
+                      <button
+                        type="button"
+                        onClick={() => setShowAllPast((v) => !v)}
+                        className="text-sm font-medium text-gray-900 underline underline-offset-4 hover:text-gray-700"
+                      >
+                        {showAllPast ? "Show fewer" : `Show all (${pastConcerts.length})`}
+                      </button>
                     </div>
                   )}
-                    {program.length > 0 && (
-                      <ul className="mt-6 space-y-3 text-sm text-gray-800">
-                        {program.map((p) => (
-                          <li key={p.id}>
-                            <span className="font-semibold">{p.composer}:</span>{" "}
-                            <span>{p.title}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {/*Ticket Info */}
-                    <div className="mt-6 flex flex-wrap items-center gap-3">
-                    {/* Ticket */}
-                    {concert.ticket_link && (
-                      <a
-                        href={concert.ticket_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-xl
-                                  bg-gray-900 px-5 py-2
-                                  text-sm font-medium text-white
-                                  transition hover:bg-gray-800"
-                      >
-                        Ticket
-                      </a>
-                    )}
-
-                    {/* View Event */}
-                    <Link
-                      to={`/concerts/${concert.id}`}
-                      className="inline-flex items-center rounded-xl
-                                border border-gray-900/20 px-5 py-2
-                                text-sm font-medium text-gray-900
-                                transition hover:bg-gray-900 hover:text-white"
-                    >
-                      View Event
-                    </Link>
-                  </div>
-
-                    {/* Admin controls */}
-                    {isAdmin && (
-                      <div className="mt-6 flex items-center gap-2">
-                        <Link
-                          to={`/concerts/${concert.id}/edit`}
-                          className="inline-flex items-center rounded-lg bg-black px-3 py-1.5 text-sm font-medium text-white hover:opacity-90"
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(concert.id)}
-                          className="inline-flex items-center rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:opacity-90"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      )}
+              </section>
+            )}
+          </div>
+        )}
     </div>
   </main>
 );

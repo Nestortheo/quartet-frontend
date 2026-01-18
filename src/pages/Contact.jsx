@@ -80,7 +80,7 @@ export default function Contact() {
       {/* Mini info strip */}
       <div className="
                 mt-6 mx-auto w-full max-w-4xl
-                rounded-2xl border border-black/10 bg-white/40 px-6 py-4 text-sm text-gray-700 shadow-sm
+                rounded-2xl border border-black/10 bg-white/30 px-6 py-4 text-sm text-gray-700 shadow-sm
                 flex flex-col items-center gap-2
                 md:flex-row md:items-center md:gap-x-6 md:gap-y-0">
         <span className="font-medium text-gray-900">Contact Erinys Quartet</span>
@@ -105,7 +105,7 @@ export default function Contact() {
               href="https://www.instagram.com/erinysquartet"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition"
+              className="hover:bg-[#ede6df] transition"
               aria-label="Instagram"
             >
               <Instagram size={28} />
@@ -115,7 +115,7 @@ export default function Contact() {
               href="https://facebook.com/erinysquartet"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition"
+              className="hover:bg-[#ede6df] transition"
               aria-label="Facebook"
             >
               <Facebook size={28} />
@@ -125,7 +125,7 @@ export default function Contact() {
               href="https://www.youtube.com/@erinysquartet"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition"
+              className="hover:bg-[#ede6df] transition"
               aria-label="YouTube"
             >
               <Youtube size={28} />
@@ -135,7 +135,7 @@ export default function Contact() {
       
 
       {/* Form card */}
-      <div className="mt-10 max-w-2xl mx-auto rounded-3xl border border border-black/10 bg-white/40 p-6 shadow-sm backdrop-blur-md sm:p-8">
+      <div className="mt-10 max-w-2xl mx-auto rounded-3xl border border border-black/10 bg-white/30 p-6 shadow-sm backdrop-blur-md sm:p-8">
         <h2 className="text-xl font-semibold text-gray-900">Send a message</h2>
         <p className="mt-1 text-sm text-gray-600">
           We usually reply within a few days.
