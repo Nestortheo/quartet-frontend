@@ -3,7 +3,7 @@ import useConcerts from "../hooks/useConcerts"; // ✅ adjust path
 import { deleteConcert } from "../api/concerts";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
-import mediaHero from "../assets/2.png"; // adjust path
+import mediaHero from "../assets/ConcertView.jpg"; // adjust path
 import ConcertRow from "../components/ConcertRow"
 
 const PAST_LIMIT = 6;
@@ -86,11 +86,14 @@ return (
   <main>
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/*Hero Image */}
-      <section className="relative mb-10 overflow-hidden rounded-3xl border border-black/5">
+      <section className="relative mb-10 overflow-hidden
+       rounded-3xl border border-black/5
+       shadow-[0_10px_40px_rgba(0,0,0,0.12)]">
           <img
             src={mediaHero}
             alt="Erinys Quartet — Media"
-            className="h-44 w-full object-cover md:h-85"
+            className="h-44 w-full object-cover md:h-85 
+            "
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/30 to-transparent" />
 
