@@ -33,14 +33,14 @@ const UpcomingConcerts = ({ limit = 3 }) => {
   const hasRealUpcoming = upcoming.length > 0;
 
   return (
-    <section>
+    <section className="w-full mx-auto overflow-x-hidden px-4 sm:px-0">
       {/* Header */}
-      <div className="w-full max-w-4xl flex items-end justify-between gap-6">
+      <div className="w-full max-w-4xl flex flex-col  justify-between gap-6 sm:border-r sm:border-neutral-900/40 sm:pr-3" >
         <div className="border-l-2 border-neutral-900/50 pl-4">
-          <h2 className="text-3xl font-semibold tracking-tight text-neutral-700">
+          <h2 className="text-xl sm:text-3xl font-semibold tracking-tight text-neutral-700">
             Upcoming concerts
           </h2>
-          <p className="mt-1 text-sm text-neutral-600">
+          <p className="mt-1 text-sm sm:text-base text-neutral-600">
             Dates are updated regularly.
           </p>
         </div>
@@ -129,27 +129,25 @@ const UpcomingConcerts = ({ limit = 3 }) => {
                 
                 <div
                   key={c.id}
-                  className="group block rounded-2xl border border-black/10 bg-white/20 backdrop-blur shadow-sm transition
+                  className=" rounded-2xl border border-black/10 bg-white/20 backdrop-blur shadow-sm transition
                              hover:-translate-y-0.5 hover:shadow-md hover:bg-white/70"
                 >
                   {/* Parent Flex for Date - Event - Detail Button */}
                   <div className="flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">
                     {/* LEFT: date */}
                     <div className="flex flex-col items-center border-r border-neutral-900/40 pr-3 text-neutral-900">
-                      <div className="text-xs uppercase tracking-widest text-neutral-500">
-                        {month}
-                      </div>
+                      <div className="text-xs uppercase tracking-widest text-neutral-500">{month}</div>
                       <div className="text-xl font-semibold leading-none">{day}</div>
                     </div>
 
                     {/* MIDDLE: main info */}
-                    <div className="min-w-0 flex-1 text-center sm:text-left">
-                      <h3 className="text-2xl font-semibold text-gray-900 underline underline-offset-4 decoration-black/20 group-hover:decoration-black/40">
+                    <div className="min-w-0 w-full flex-1 text-center sm:text-left">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 underline underline-offset-4 decoration-black/20 group-hover:decoration-black/40">
                         {c.title || "Untitled Concert"}
                       </h3>
 
                       {c.venue_detail && (
-                        <p className="mt-1 text-lg text-black-900">
+                        <p className="mt-1 text-lg sm:text-lg text-black-900">
                           {[c.venue_detail.name].filter(Boolean).join(" • ")}
                         </p>
                       )}
@@ -161,12 +159,12 @@ const UpcomingConcerts = ({ limit = 3 }) => {
                       )}
 
                       {Array.isArray(c.program) && c.program.length > 0 ? (
-                        <ul className="mt-4 space-y-1 text-sm text-gray-700">
+                        <ul className="mt-4 space-y-1 text-sm text-gray-700  sm:block">
                           {[...c.program]
                             .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
                             .slice(0, 2)
                             .map((p) => (
-                              <li key={p.id} className="truncate">
+                              <li key={p.id} className="break-words sm:truncate sm:whitespace-nowrap">
                                 <span className="font-medium text-gray-900">
                                   {p.composer}:
                                 </span>{" "}
