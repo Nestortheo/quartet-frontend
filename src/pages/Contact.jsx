@@ -21,7 +21,7 @@ export default function Contact() {
   }
   //This is for the color of message 
  const statusStyles = {
-  success: "text-green-600",
+  success: "text-[#3a3a3a]",
   error: "text-red-600",
   sending: "text-gray-500",
 };
