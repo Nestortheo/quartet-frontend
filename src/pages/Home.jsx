@@ -15,7 +15,7 @@ const Home = () => {
   data-nav-theme="dark"
   className="
     relative overflow-hidden bg-black
-    h-[46vh] min-h-[300px] max-h-[520px]
+    h-[42vh] min-h-[280px] max-h-[520px]
     sm:h-[52vh] sm:min-h-[360px] sm:max-h-[600px]
     md:h-[60vh] md:min-h-[420px] md:max-h-[680px]
   "
