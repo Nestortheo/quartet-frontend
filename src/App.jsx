@@ -52,7 +52,7 @@ const App = () => {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/concerts/:id" element={<ConcertDetail />} />
-        <Route path="/testpage/" element={<PracticePage/>} />
+        
          {/* ✅ catch-all */}
         <Route path="*" element={<NotFound />} />
 
