@@ -12,85 +12,85 @@ const Home = () => {
     <main >
       {/*HERO IMAGE*/}
       <section
-  data-nav-theme="dark"
-  className="
-    relative overflow-hidden bg-black
-    h-[42vh] min-h-[280px] max-h-[520px]
-    sm:h-[52vh] sm:min-h-[360px] sm:max-h-[600px]
-    md:h-[60vh] md:min-h-[420px] md:max-h-[680px]
-  "
->
-  {/* Hero image */}
-  <img
-    src={quartetImg}
-    alt="Erinys Quartet"
-    className="h-full w-full object-cover object-center"
-  />
-
-  {/* subtle dark overlay */}
-  <div className="absolute inset-0 bg-black/15" />
-
-  {/* Title strip */}
-  <div className="absolute inset-x-0 bottom-0">
-    <div className="mx-auto max-w-6xl px-4 pb-[clamp(1rem,4vw,2rem)]">
-      <div
+        data-nav-theme="dark"
         className="
-          inline-flex max-w-[min(100%,36rem)] flex-col gap-2 rounded-xl
-          bg-black/25 text-white backdrop-blur
-          px-[clamp(1rem,3vw,1.5rem)]
-          py-[clamp(0.75rem,2.5vw,1.25rem)]
+          relative overflow-hidden bg-black
+          h-[42vh] min-h-[280px] max-h-[520px]
+          sm:h-[52vh] sm:min-h-[360px] sm:max-h-[600px]
+          md:h-[60vh] md:min-h-[420px] md:max-h-[680px]
         "
       >
-        <h1 className="font-semibold leading-tight text-[clamp(1.4rem,4vw,1.9rem)]">
-          Erinys Quartet
-        </h1>
+        {/* Hero image */}
+        <img
+          src={quartetImg}
+          alt="Erinys Quartet"
+          className="h-full w-full object-cover object-center"
+        />
 
-        <p className="text-white/85 text-[clamp(0.75rem,2.6vw,0.9rem)]">
-          Vienna-based string quartet • Classical & contemporary repertoire
-        </p>
+        {/* subtle dark overlay */}
+        <div className="absolute inset-0 bg-black/15" />
 
-        <div className="mt-2 flex flex-wrap items-center gap-4 text-white/90 text-[clamp(0.8rem,2.5vw,0.95rem)]">
-          <a
-            href="https://www.instagram.com/erinysquartet"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition"
-            aria-label="Instagram"
-          >
-            <Instagram size={18} />
-          </a>
+        {/* Title strip */}
+        <div className="absolute inset-x-0 bottom-0">
+          <div className="mx-auto max-w-6xl px-4 pb-[clamp(1rem,4vw,2rem)]">
+            <div
+              className="
+                inline-flex max-w-[min(100%,36rem)] flex-col gap-2 rounded-xl
+                bg-black/25 text-white backdrop-blur
+                px-[clamp(1rem,3vw,1.5rem)]
+                py-[clamp(0.75rem,2.5vw,1.25rem)]
+              "
+            >
+              <h1 className="font-semibold leading-tight text-[clamp(1.4rem,4vw,1.9rem)]">
+                Erinys Quartet
+              </h1>
 
-          <a
-            href="https://facebook.com/erinysquartet"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition"
-            aria-label="Facebook"
-          >
-            <Facebook size={18} />
-          </a>
+              <p className="text-white/85 text-[clamp(0.75rem,2.6vw,0.9rem)]">
+                Vienna-based string quartet • Classical & contemporary repertoire
+              </p>
 
-          <a
-            href="mailto:erinys.stringquartet@gmail.com"
-            className="hover:text-white transition"
-            aria-label="Email"
-          >
-            <Mail size={18} />
-          </a>
+              <div className="mt-2 flex flex-wrap items-center gap-4 text-white/90 text-[clamp(0.8rem,2.5vw,0.95rem)]">
+                <a
+                  href="https://www.instagram.com/erinysquartet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={18} />
+                </a>
 
-          <span className="text-white/60">·</span>
+                <a
+                  href="https://facebook.com/erinysquartet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={18} />
+                </a>
 
-          <Link
-            to="/concerts"
-            className="font-medium underline underline-offset-4 hover:text-white"
-          >
-            View concerts
-          </Link>
+                <a
+                  href="mailto:erinys.stringquartet@gmail.com"
+                  className="hover:text-white transition"
+                  aria-label="Email"
+                >
+                  <Mail size={18} />
+                </a>
+
+                <span className="text-white/60">·</span>
+
+                <Link
+                  to="/concerts"
+                  className="font-medium underline underline-offset-4 hover:text-white"
+                >
+                  View concerts
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/*Mini Intro after HERO */}
       <div data-nav-theme="light" className="py-16 md:py-20">
