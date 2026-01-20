@@ -17,10 +17,13 @@ import EditConcertPage from './pages/EditConcertPage.jsx';
 import ConcertDetail from "./pages/ConcertDetail.jsx";
 import Footer from "./components/Footer";
 import PracticePage from './pages/PracticePage.jsx';
+import NotFound from './pages/NotFound.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 
 const App = () => {
   return (
 <div className="min-h-screen flex flex-col">
+  <ScrollToTop />
   <MyNavbar />
 
   {/* PAGE BACKGROUND (not header) */}
@@ -50,6 +53,8 @@ const App = () => {
         <Route path="/practice" element={<Practice />} />
         <Route path="/concerts/:id" element={<ConcertDetail />} />
         <Route path="/testpage/" element={<PracticePage/>} />
+         {/* ✅ catch-all */}
+        <Route path="*" element={<NotFound />} />
 
         <Route
           path="/createConcert"
