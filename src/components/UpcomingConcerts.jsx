@@ -147,19 +147,19 @@ const UpcomingConcerts = ({ limit = 3 }) => {
                       </h3>
 
                       {c.venue_detail && (
-                        <p className="mt-1 text-lg sm:text-lg text-black-900">
+                        <p className="mt-2 text-base text-gray-600 sm:text-lg sm:text-black">
                           {[c.venue_detail.name].filter(Boolean).join(" • ")}
                         </p>
                       )}
 
                       {c.venue_detail && (
-                        <p className="mt-1 text-m text-gray-600">
+                        <p className="hidden sm:block mt-1 text-m text-gray-600">
                           {[c.venue_detail.city].filter(Boolean).join(" • ")}
                         </p>
                       )}
 
                       {Array.isArray(c.program) && c.program.length > 0 ? (
-                        <ul className="mt-4 space-y-1 text-sm text-gray-700  sm:block">
+                        <ul className="mt-4 pt-3 border-t border-black/5 space-y-1 text-sm text-gray-700">
                           {[...c.program]
                             .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
                             .slice(0, 2)

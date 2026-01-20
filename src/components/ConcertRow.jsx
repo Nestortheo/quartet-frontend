@@ -30,9 +30,7 @@ export default function ConcertRow({ concert, fmtFull, isAdmin, handleDelete, va
       <div className="flex gap-8">
         {/* Date badge */}
         <div className="flex h-16 w-16 flex-col items-center justify-center rounded-xl bg-black/5 text-gray-800">
-          <div className="text-[11px] font-semibold tracking-widest text-gray-600">
-            {month}
-          </div>
+          <div className="text-[11px] font-semibold tracking-widest text-gray-600">{month}</div>
           <div className="text-xl font-semibold leading-none">{day}</div>
         </div>
 
@@ -83,7 +81,7 @@ export default function ConcertRow({ concert, fmtFull, isAdmin, handleDelete, va
           )}
 
           {program.length > 0 && (
-            <ul className="mt-6 space-y-3 text-sm text-gray-800">
+            <ul className="mt-5 pt-3 space-y-2 border-t border-black/5 text-sm text-gray-800">
               {program.map((p) => (
                 <li key={p.id}>
                   <span className="font-semibold">{p.composer}:</span>{" "}
