@@ -1,12 +1,26 @@
-# React + Vite
+# Quartet Concert Website – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend for a concert/quartet website built with React and connected to a Django backend.  
+Displays concert data dynamically and communicates with the backend via API.
 
-Currently, two official plugins are available:
+## Tech Stack
+- React
+- JavaScript (ES6+)
+- Axios
+- Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Dynamic rendering of concert data from backend
+- API communication with Django REST backend
+- Structured React components
+- Clean and responsive UI
 
-## Expanding the ESLint configuration
+## How to run locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+npm install  
+npm run dev  
+
+Make sure the Django backend server is running.
+
+Note: The database may start empty.  
+You can log into the Django admin panel OR to the frontend /admin-login and create concerts to see them appear on the frontend.
