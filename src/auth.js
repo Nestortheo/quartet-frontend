@@ -4,6 +4,7 @@ export async function login(username, password) {
   // POST credentials to Django SimpleJWT
   //const { data } = await axios.post(`${AUTH_BASE}/token/`, { username, password });
   const {data} = await api.post("/token/", {username, password});
+  console.log("DATA IS ->",data)
   // data = { access, refresh }
   setTokens({ access: data.access, refresh: data.refresh });
   return true;

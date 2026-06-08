@@ -10,7 +10,7 @@ export default function AdminLogin() {
   const navigate = useNavigate(); // initialize navigate
 
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/dashboard";
+  const from = location.state?.from?.pathname || "/createConcert";
 
   
 

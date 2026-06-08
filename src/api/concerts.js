@@ -1,8 +1,11 @@
 import api from "./api"
 
-export async function fetchConcerts(){
-    const res = await api.get("/concerts/");
-    return res.data.results ?? res.data;
+export async function fetchConcerts() {
+  const res = await api.get("/concerts/", {
+    timeout: 10000, // 10 seconds
+  });
+
+  return res.data.results ?? res.data;
 }
 
 export async function fetchConcertById(id){

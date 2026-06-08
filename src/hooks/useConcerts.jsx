@@ -4,6 +4,7 @@ import { fetchConcerts } from "../api/concerts.js";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function useConcerts() {
+
   const [concerts, setConcerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,13 +25,19 @@ export default function useConcerts() {
       for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
         try {
           const data = await fetchConcerts();
+          console.log(
+            `Concert fetch succeeded. Attempt ${attempt}/${MAX_TRIES}`
+          );
 
           if (cancelled) return;
           setConcerts(Array.isArray(data) ? data : []);
           setLoading(false);
           return; // ✅ success, stop retrying
         } catch (err) {
-          console.error(err);
+          console.error(
+            `Concert fetch failed. Attempt ${attempt}/${MAX_TRIES}`,
+            err
+          );
 
           if (attempt === MAX_TRIES) {
             if (!cancelled) {
@@ -40,7 +47,6 @@ export default function useConcerts() {
             return;
           }
 
-          // backoff before retrying: 600ms, 1200ms, 2400ms...
           await sleep(600 * 2 ** (attempt - 1));
         }
       }

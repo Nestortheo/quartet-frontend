@@ -91,7 +91,7 @@ export default function ConcertRow({ concert, fmtFull, isAdmin, handleDelete, va
             </ul>
           )}
 
-          {/* Ticket Info */}
+          {/* Ticket Info only in Upcoming concerts*/}
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {concert.ticket_link && !isPast && (
               <a
