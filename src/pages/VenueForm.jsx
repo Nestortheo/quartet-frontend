@@ -10,6 +10,7 @@ const VenueForm = () => {
     const [city, setCity] = useState("");
     const [address, setAddress] = useState("");
     const [mapLink, setMapLink] = useState("")
+    const [imageUrl, setImageUrl] = useState("");
 
     const [submitting, setSubmitting] = useState(false);
     const [message, setMessage] = useState(null);
@@ -53,11 +54,20 @@ const VenueForm = () => {
             return;
         }
 
+        const cleanImage = imageUrl.trim();
+        if (cleanImage && !isValidUrl(cleanImage)) {
+            setMessage("Please enter a valid image URL.");
+            return;
+        }   
+
+
         setSubmitting(true);
+
         try{
          const payload = {
             name: name.trim(),
             city: city.trim(),
+            ...(cleanImage ? { image_url: cleanImage } : {}),
             address: address.trim(),
             ...(cleanMap ? { map_link: cleanMap } : {}), // ✅ only include if non-empty & valid
             };
@@ -72,11 +82,13 @@ const VenueForm = () => {
             // reset inputs
             setName("");
             setCity("");
+            setImageUrl("");
             setAddress("");
             setMapLink("");
 
 
-        }catch (err) {
+        }
+        catch (err) {
             console.error("❌ Error creating venue:", err);
 
             const data = err?.response?.data;
@@ -91,52 +103,75 @@ const VenueForm = () => {
                 setMessage("❌ Failed to create venue");
             }
     }
+    finally{
+        setSubmitting(false);
+    }
   }    
 
 
  return(
     <form onSubmit={handleVenueSubmit} className="max-w-md mx-auto p-6 space-y-4">
         <h1 className="text-xl font-semibold">Create Venue</h1>
-        <div className="flex flex-col space-y-1"></div>
+        <div className="flex flex-col space-y-1">
             <label className="text-sm font-medium">Name</label>
             <input 
+                name="name"
                 value = {name}
                 onChange={(e) => setName(e.target.value)}
                 className="border p-2 w-full rounded"
                 placeholder="Name"
             />
+        </div>
             
-        <div className="flex flex-col space-y-1"></div>
+        <div className="flex flex-col space-y-1">
             <label className="text-sm font-medium">City</label>
             <input
+                name="city"
                 value = {city}
                 onChange = {(e) => setCity(e.target.value)}
                 className="border p-2 w-full rounded"
                 placeholder="City"
             />
-            
-        <div className="flex flex-col space-y-1"></div>
+        </div>   
+
+        <div className="flex flex-col space-y-1">
+            <label>Venue Image URL</label>
+            <input 
+                type="url"
+                name="imageUrl"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="border p-2 w-full rounded"
+                placeholder="https://example.com/festival.jpg"
+                
+            />
+        </div>
+
+        <div className="flex flex-col space-y-1">
             <label className="text-sm font-medium">Address</label>
             <input
+                name="address"
                 value = {address}
                 onChange = {(e) => setAddress(e.target.value)}
                 className="border p-2 w-full rounded"
                 placeholder="Address"
             />
+        </div>
             
         <div className="flex flex-col space-y-1">
             <label className="text-sm font-medium">Map Link</label>
             <input
-            type="url"
-            value={mapLink}
-            onChange={(e) => setMapLink(e.target.value)}
-            className="border p-2 w-full rounded"
-            placeholder="https://maps.google.com/?q=Kalantidou+38+Athens"
+                name="mapLink"
+                type="url"
+                value={mapLink}
+                onChange={(e) => setMapLink(e.target.value)}
+                className="border p-2 w-full rounded"
+                placeholder="https://maps.google.com/?q=Kalantidou+38+Athens"
             />
             <button
-            type="button"
-            className="text-xs underline mt-1"
-            onClick={() => setMapLink(makeMapsUrl(address, city))}
+                type="button"
+                className="text-xs underline mt-1"
+                onClick={() => setMapLink(makeMapsUrl(address, city))}
             >
             Generate from address
             </button>

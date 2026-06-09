@@ -2,7 +2,7 @@ import api from "./api"
 
 export async function fetchConcerts() {
   const res = await api.get("/concerts/", {
-    timeout: 10000, // 10 seconds
+    timeout: 20000, // 20 seconds
   });
 
   return res.data.results ?? res.data;
