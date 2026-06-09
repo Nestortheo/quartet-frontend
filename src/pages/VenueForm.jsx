@@ -67,7 +67,7 @@ const VenueForm = () => {
          const payload = {
             name: name.trim(),
             city: city.trim(),
-            ...(cleanImage ? { image_url: cleanImage } : {}),
+            ...(cleanImage ? { imageUrl: cleanImage } : {}),
             address: address.trim(),
             ...(cleanMap ? { map_link: cleanMap } : {}), // ✅ only include if non-empty & valid
             };

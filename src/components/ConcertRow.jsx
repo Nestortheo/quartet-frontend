@@ -2,6 +2,9 @@
 import { Link } from "react-router-dom";
 
 export default function ConcertRow({ concert, fmtFull, isAdmin, handleDelete, variant }) {
+
+  console.log("Venue:", concert.venue);
+  console.log("Image:", concert.venue_detail.imageUrl);
   const d = new Date(concert.date_start);
 
   const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
@@ -51,6 +54,15 @@ export default function ConcertRow({ concert, fmtFull, isAdmin, handleDelete, va
           </div>
 
           <p className="mt-2 text-sm text-gray-600">{fmtFull.format(d)}</p>
+          
+          {concert.venue_detail.imageUrl && (
+            
+            <img 
+              src={concert.venue_detail.imageUrl}
+              alt={concert.venue_detail.name}
+              className="w-64 h-40 object-cover rounded-xl flex-shrink-0"
+            />
+          )}
 
           {(venue || mapUrl) && (
             <div className="mt-2 space-y-1 text-sm text-gray-700">
