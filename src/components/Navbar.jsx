@@ -1,22 +1,56 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 export default function MyNavbar() {
   const [open, setOpen] = useState(false);
 
-  const linkBase =
-    "block px-3 py-2 text-sm md:text-[15px] rounded-md transition-colors duration-200 hover:text-gray-900";
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
+  const linkBase = `
+    block px-3 py-2
+    text-sm md:text-[15px]
+    rounded-md
+    transition-colors duration-200
+  `;
   const linkActive = "text-black font-medium";
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const transparentHero = isHome && !scrolled;
+
   return (
-    <header className="sticky top-0 z-50">
-      <div className="bg-[#eceae7]/90 backdrop-blur-md border-b border-black/5">
-        <nav className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div
+        className={`
+          transition-all duration-300
+          ${
+            transparentHero
+              ? "bg-transparent"
+              : "bg-[#e4ddd5]/70 backdrop-blur-sm border-b border-black/15"
+          }
+        `}
+      >
+        <nav className="mx-auto max-w-[1600px] px-12 lg:px-8 py-8 flex items-center justify-between">
           {/* Logo */}
           <Link
             to="/"
-            className="text-lg font-medium tracking-widest uppercase text-gray-900"
+            className={`
+              text-lg font-medium tracking-widest uppercase
+              transition-colors duration-300
+              ${transparentHero ? "text-white" : "text-gray-900"}
+            `}
           >
             Erinys Quartet
           </Link>
@@ -33,7 +67,21 @@ export default function MyNavbar() {
                 <NavLink
                   to={to}
                   className={({ isActive }) =>
-                    `${linkBase} ${isActive ? linkActive : ""}`
+                    `
+                      ${linkBase}
+                      ${
+                        transparentHero
+                          ? "text-white/80 hover:text-white"
+                          : "text-gray-700 hover:text-black"
+                      }
+                      ${
+                        isActive
+                          ? transparentHero
+                            ? "text-white"
+                            : "text-black font-medium"
+                          : ""
+                      }
+                    `
                   }
                 >
                   {label}
@@ -44,7 +92,19 @@ export default function MyNavbar() {
 
           {/* Mobile button */}
           <button
-            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-900 hover:bg-black/5 transition"
+            className={`
+              md:hidden
+              inline-flex
+              items-center justify-center 
+              rounded-md 
+              p-2
+              hover:bg-black/5
+              transition-colors
+              duration-300
+              ${
+                transparentHero ? "text-white" : "text-gray-900"
+              }
+            `}
             aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
@@ -86,8 +146,22 @@ export default function MyNavbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-white">
-          <div className="mx-auto max-w-7xl px-6 py-3 space-y-1 text-gray-700">
+        <div className={`
+                md:hidden
+                ${transparentHero
+                  ? "bg-transparent"
+                  : "bg-[#e4ddd5]/70 backdrop-blur-sm border-b border-black/15"
+                }`}
+        >
+          <div className={`
+                  mx-auto max-w-7xl
+                  px-6 py-3
+                  space-y-1
+                  ${transparentHero
+                    ? "text-white"
+                    : "text-gray-700"
+                  }`}
+            >
             {[
               ["About", "/about"],
               ["Concerts", "/concerts"],
@@ -101,8 +175,12 @@ export default function MyNavbar() {
                 className={({ isActive }) =>
                   `block px-3 py-2 rounded-md transition ${
                     isActive
-                      ? "text-gray-900 font-medium"
-                      : "hover:text-gray-900"
+                      ? transparentHero
+                        ? "text-white font-medium"
+                        : "text-gray-900 font-medium"
+                      : transparentHero
+                        ? "text-white/80 hover:text-white"
+                        : "hover:text-gray-900"
                   }`
                 }
               >

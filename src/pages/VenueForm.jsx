@@ -8,6 +8,7 @@ const VenueForm = () => {
 
     const [name,setName] = useState("");
     const [city, setCity] = useState("");
+    const[country,setCountry] = useState("")
     const [address, setAddress] = useState("");
     const [mapLink, setMapLink] = useState("")
     const [imageUrl, setImageUrl] = useState("");
@@ -67,6 +68,7 @@ const VenueForm = () => {
          const payload = {
             name: name.trim(),
             city: city.trim(),
+            country: country.trim(),
             ...(cleanImage ? { imageUrl: cleanImage } : {}),
             address: address.trim(),
             ...(cleanMap ? { map_link: cleanMap } : {}), // ✅ only include if non-empty & valid
@@ -132,7 +134,18 @@ const VenueForm = () => {
                 className="border p-2 w-full rounded"
                 placeholder="City"
             />
-        </div>   
+        </div>
+
+        <div className="flex flex-col space-y-1">
+            <label className="text-sm font-medium">Country</label>
+            <input
+                name="country"
+                value = {country}
+                onChange = {(e) => setCountry(e.target.value)}
+                className="border p-2 w-full rounded"
+                placeholder="Country"
+            />
+        </div>      
 
         <div className="flex flex-col space-y-1">
             <label>Venue Image URL</label>

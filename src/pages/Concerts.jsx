@@ -8,8 +8,9 @@ import ConcertRow from "../components/ConcertRow"
 
 const PAST_LIMIT = 6;
 
-const Concerts = () => {
+export default function Concerts(){
 
+  const [view, setView] = useState("upcoming");
   
   const isAdmin = isAuthenticated()
   const { concerts, loading, error, removeConcert } = useConcerts();
@@ -20,8 +21,11 @@ const Concerts = () => {
   // “Completed” = 1 day after the event start date
   const isPastConcert = (dateStartIso) => {
     const start = new Date(dateStartIso);
+
     const cutoff = new Date(start);
+    cutoff.setHours(0, 0, 0, 0);
     cutoff.setDate(cutoff.getDate() + 1);
+
     return new Date() >= cutoff;
   };
 
@@ -30,6 +34,11 @@ const Concerts = () => {
     const past = [];
 
     for (const c of concerts) {
+      console.log(
+        c.title,
+        c.date_start,
+        isPastConcert(c.date_start)
+      );
       if (isPastConcert(c.date_start)) past.push(c);
       else upcoming.push(c);
     }
@@ -46,23 +55,10 @@ const Concerts = () => {
     return showAllPast ? pastConcerts : pastConcerts.slice(0,PAST_LIMIT)
   },[pastConcerts, showAllPast]);
 
-   const hasMorePast = pastConcerts.length > PAST_LIMIT;
+  const hasMorePast = pastConcerts.length > PAST_LIMIT;
+   
 
-  
-  // 📅 Date formatter (runs once per render)
-  const fmtFull = useMemo(
-    () =>
-      new Intl.DateTimeFormat("en-GB", {
-        dateStyle: "full",
-        timeStyle: "short",
-        timeZone: "Europe/Athens",
-      }),
-    []
-  );
-
- {/*Fetching concerts and removeConcert are called from useConcerts,
-  I DID THIS CAUSE I WANTED TO FETCH AGAIN CONCERTS FOR THE HOME
-  SO I DONT WRITE CODE TO FETCH TWICE THE CONCERTS */}
+ {/*Admin feature - DELETE concert*/}
   const handleDelete = async (id) => {
     if (!isAuthenticated()) return;
     if (!window.confirm("Delete this concert?")) return;
@@ -86,9 +82,12 @@ return (
   <main>
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/*Hero Image */}
-      <section className="relative mb-10 overflow-hidden
-       rounded-3xl border border-black/5
-       shadow-[0_10px_40px_rgba(0,0,0,0.12)]">
+      <section className="
+                  relative mb-10 overflow-hidden mt-16
+                  rounded-3xl border border-black/5
+                  shadow-[0_10px_40px_rgba(0,0,0,0.12)]
+                "
+      >
           <img
             src={mediaHero}
             alt="Erinys Quartet — Media"
@@ -121,57 +120,92 @@ return (
         )}
       </div>
 
-     {concerts.length === 0 ? (
-          <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
-            No concerts available yet.
-          </div>
-        ) : (
-          <div className="space-y-10">
-            {/* UPCOMING */}
-            {upcomingConcerts.length === 0 ? (
-              <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
-                No upcoming concerts right now.
-              </div>
-            ) : (
-              <div className="space-y-10">
-                {upcomingConcerts.map((concert) => (
-                  <ConcertRow
-                    key={concert.id}
-                    concert={concert}
-                    fmtFull={fmtFull}
-                    isAdmin={isAdmin}
-                    handleDelete={handleDelete}
-                    variant="upcoming"
-                  />
-                ))}
-              </div>
-            )}
-           
-            {/* PAST (collapsible) && limitied to 8 && showAllPast */}
-            {pastConcerts.length > 0 && (
-              <section className="pt-2">
-                  <div className="mb-6 flex items-end justify-between gap-4">
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-900">
-                        Past concerts
-                      </h3>
-                      <span className="text-xs text-gray-600">
-                        {pastConcerts.length} completed
-                      </span>
-                    </div>
+      {/*Upcoming & Past Concerts Buttons*/}
+      <div className="flex gap-8 border-b border-[#e8dfd4] mb-8">
+        <button
+          onClick={() => setView("upcoming")}
+          className={`
+            pb-3 text-sm font-medium transition
+            ${
+              view === "upcoming"
+                ? "border-b-2 border-[#c49b63] text-gray-900 font-semibold"
+                : "text-gray-500 hover:text-gray-800 font-medium"
+            }
+          `}
+        >
+          Upcoming Concerts
+        </button>
+
+        <button
+          onClick={() => setView("past")}
+          className={`
+            pb-3 text-sm font-medium transition
+            ${
+              view === "past"
+                ? "border-b-2 border-[#c49b63] text-gray-900 font-semibold"
+                : "text-gray-500 hover:text-gray-800 font-medium"
+            }
+          `}
+        >
+          Past Concerts
+        </button>
+      </div>
+
+      {concerts.length === 0 ? (
+        <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
+          No concerts available yet.
+        </div>
+      ) : (
+        <>
+          {view === "upcoming" && (
+            <>
+              {upcomingConcerts.length === 0 ? (
+                <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
+                  No upcoming concerts right now.
+                </div>
+              ) : (
+                <div className="space-y-10">
+                  {upcomingConcerts.map((concert) => (
+                    <ConcertRow
+                      key={concert.id}
+                      concert={concert}
+                      isAdmin={isAdmin}
+                      handleDelete={handleDelete}
+                      variant="upcoming"
+                      //variant ="upcoming" isnt really used in the ConcertRow, i just keep it for symmetry
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
+          {view === "past" && (
+            <>
+              {pastConcerts.length === 0 ? (
+                <div className="rounded-2xl border border-gray-200 p-8 text-sm text-gray-600">
+                  No past concerts available.
+                </div>
+              ) : (
+                <>
+                  <div className="mb-6">
+                    <span className="text-sm text-gray-600">
+                      {pastConcerts.length} completed concerts
+                    </span>
                   </div>
-                  <div className="mt-6 space-y-10">
+
+                  <div className="space-y-10">
                     {visiblePastConcerts.map((concert) => (
                       <ConcertRow
                         key={concert.id}
                         concert={concert}
-                        fmtFull={fmtFull}
                         isAdmin={isAdmin}
                         handleDelete={handleDelete}
                         variant="past"
                       />
                     ))}
                   </div>
+
                   {hasMorePast && (
                     <div className="pt-6 text-center">
                       <button
@@ -179,17 +213,20 @@ return (
                         onClick={() => setShowAllPast((v) => !v)}
                         className="text-sm font-medium text-gray-900 underline underline-offset-4 hover:text-gray-700"
                       >
-                        {showAllPast ? "Show fewer" : `Show all (${pastConcerts.length})`}
+                        {showAllPast
+                          ? "Show fewer"
+                          : `Show all (${pastConcerts.length})`}
                       </button>
                     </div>
                   )}
-              </section>
-            )}
-          </div>
-        )}
+                </>
+              )}
+            </>
+          )}
+        </>
+      )}
     </div>
   </main>
 );
 };
 
-export default Concerts;

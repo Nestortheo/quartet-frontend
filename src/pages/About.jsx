@@ -14,9 +14,10 @@ const members = [
 
 const About = () => {
   return (
-    <main data-nav-theme>
+    <main>
       <section className="
-          relative overflow-hidden bg-black
+          relative overflow-hidden bg-black mt-25
+
           h-[42vh] min-h-[280px] max-h-[520px]
           sm:h-[52vh] sm:min-h-[360px] sm:max-h-[600px]
           md:h-[60vh] md:min-h-[420px] md:max-h-[680px]

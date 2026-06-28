@@ -27,7 +27,7 @@ const Media = () => {
     <main>
       <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         {/*Hero Image */}
-        <section className="relative mb-10 overflow-hidden rounded-3xl border border-black/5">
+        <section className="relative mb-10 overflow-hidden rounded-3xl border border-black/5 mt-16">
           <img
             src={mediaHero}
             alt="Erinys Quartet — Media"

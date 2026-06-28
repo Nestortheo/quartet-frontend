@@ -21,6 +21,8 @@ import NotFound from './pages/NotFound.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Practice2 from './pages/Practice2.jsx';
 
+import AboutRemake from './pages/AboutRemake.jsx';
+
 const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
@@ -44,7 +46,7 @@ const App = () => {
           <div className="relative z-10 h-full">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
+              <Route path="/about" element={<AboutRemake />} />
               <Route path="/concerts" element={<Concerts />} />
               <Route path="/media" element={<Media />} />
               <Route path="/contact" element={<Contact />} />
