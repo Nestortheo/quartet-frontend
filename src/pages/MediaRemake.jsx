@@ -1,6 +1,6 @@
 
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import photo1 from "../assets/1.png";
 import photo2 from "../assets/2.png";
 import photo3 from "../assets/3.jpg";
