@@ -62,6 +62,22 @@ export default function MediaRemake(){
         });
    }
 
+   //nextPhoto and prevPhoto for mobile
+   const touchStartX = useRef(0);
+   const touchEndX = useRef(0);
+
+   const handleTouchEnd = () => {
+        const distance = touchEndX.current - touchStartX.current;
+
+        if (distance > 50) {
+            prevPhoto();
+        }
+
+        if (distance < -50) {
+            nextPhoto();
+        }
+    };
+
    //Disable Scrolling when on Gallery
    useEffect(() => {
         if (selectedPhoto !== null) {
@@ -291,10 +307,19 @@ export default function MediaRemake(){
                         >
                         <ArrowLeft size={22} className="cursor-pointer text-white"/>
                     </button>
-
-                    <div 
+                    
+                    {/* GALLERY */}
+                    <div
                         className="relative"
                         onClick={(e) => e.stopPropagation()}
+                        onTouchStart={(e) => {
+                            touchStartX.current = e.touches[0].clientX;
+                            touchEndX.current = e.touches[0].clientX;
+                        }}
+                        onTouchMove={(e) => {
+                            touchEndX.current = e.touches[0].clientX;
+                        }}
+                        onTouchEnd={handleTouchEnd}
                     >
                         <img
                             src={photos[selectedPhoto].src}
