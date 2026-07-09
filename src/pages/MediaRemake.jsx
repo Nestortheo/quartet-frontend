@@ -284,10 +284,14 @@ export default function MediaRemake(){
                     <button
                         type="button"
                         className="mr-8"
-                        onClick={prevPhoto}
+                         onClick={(e) => {
+                            e.stopPropagation();
+                            prevPhoto();
+                        }}
                         >
                         <ArrowLeft size={22} className="cursor-pointer text-white"/>
                     </button>
+
                     <div 
                         className="relative"
                         onClick={(e) => e.stopPropagation()}
@@ -314,7 +318,10 @@ export default function MediaRemake(){
                     <button
                         type="button"
                         className="ml-8"
-                        onClick={nextPhoto}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            nextPhoto();
+                        }}
                     >
                         <ArrowRight size={22} className="cursor-pointer text-white"/>
                     </button>
