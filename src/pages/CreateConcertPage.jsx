@@ -34,7 +34,7 @@ export default function CreateConcertPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6 space-y-4">
+    <div className="max-w-md mx-auto p-6 space-y-4 mt-24">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">Dashboard</h1>
       </div>

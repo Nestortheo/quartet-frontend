@@ -32,7 +32,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-sm mx-auto p-6 space-y-3">
+    <form onSubmit={onSubmit} className="max-w-sm mx-auto p-6 space-y-3 mt-24">
       <h1 className="text-xl font-semibold">Admin Login</h1>
       <input name="username" className="border p-2 w-full" placeholder="Username" />
       <input name="password" type="password" className="border p-2 w-full" placeholder="Password" />

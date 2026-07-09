@@ -68,11 +68,11 @@ function VideoCardMedia({ video, showMeta= true, className="" }) {
 
         {showMeta && (
           <div className="p-4 min-h-[72px]">
-            <div className="text-sm font-semibold text-gray-900">
+            <div className="text-sm font-semibold text-neutral-900 ">
               {video.title}
             </div>
             {video.subtitle && (
-              <div className="mt-1 text-sm text-gray-600">
+              <div className="mt-1 text-sm text-neutral-500">
                 {video.subtitle}
               </div>
             )}

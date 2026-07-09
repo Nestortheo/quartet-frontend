@@ -75,7 +75,7 @@ export default function EditConcertPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6 space-y-4">
+    <div className="max-w-md mx-auto p-6 space-y-4 mt-24">
       <h1 className="text-xl font-semibold">Edit Concert</h1>
       {message && <p className={messageClass}>{message}</p>}
 

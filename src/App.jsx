@@ -4,13 +4,14 @@ import MyNavbar from './components/Navbar';
 import About from './pages/About';
 import Concerts from './pages/Concerts';
 import Media from './pages/Media';
+import MediaRemake from './pages/MediaRemake.jsx';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import TestApi from "./pages/TestApi";
 import TestAuth from "./pages/TestAuth.jsx";
 import AdminLogin from './pages/AdminLogin.jsx';
 import CreateConcertPage from './pages/CreateConcertPage.jsx'
-import VenueForm from "./pages/VenueForm";
+import CreateVenuePage from "./pages/CreateVenuePage.jsx";
 import RequireAuth from './components/RequireAuth.jsx';
 import EditConcertPage from './pages/EditConcertPage.jsx';
 import ConcertDetail from "./pages/ConcertDetail.jsx";
@@ -48,7 +49,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<AboutRemake />} />
               <Route path="/concerts" element={<Concerts />} />
-              <Route path="/media" element={<Media />} />
+             
+              <Route path="/media" element={<MediaRemake/>} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/test" element={<TestApi />} />
               <Route path="/test-auth" element={<TestAuth />} />
@@ -82,7 +84,7 @@ const App = () => {
                 path="/venues/new"
                 element={
                   <RequireAuth>
-                    <VenueForm />
+                    <CreateVenuePage />
                   </RequireAuth>
                 }
               />
