@@ -281,32 +281,40 @@ const Home = () => {
 
       
         {/* Content for Mobile */}
-        <div className="block md:hidden relative z-10">
+        <div className="block md:hidden relative z-10 flex items-center justify-center pt-10">
           <div className="space-y-8">
 
             <p className="text-sm tracking-wider text-[#c49b63]">
               ERINYS · STRING QUARTET
             </p>
 
+            <div className='h-px w-10 border border-yellow-700'/>
+
             <div className="font-serif leading-none">
               <h2 className="text-5xl">
                 Timeless
               </h2>
 
-              <h2 className="text-5xl">
+              <h2 className="text-5xl italic text-[#c49b63]">
                 music,
               </h2>
 
-              <div className="mt-2 flex flex-col">
-                <span className="text-5xl">in</span>
+              <div className="flex flex-col">
 
-                <span className="text-5xl italic text-[#c49b63]">
-                  dialogue
-                </span>
+                <div className='flex gap-2'>
+                  <span className="text-5xl">in</span>
 
-                <span className="text-5xl">
-                  with today.
-                </span>
+                  <span className="text-5xl ">
+                    dialogue
+                  </span>
+                </div>
+                
+                <div>
+                  <span className="text-5xl italic text-[#c49b63]">
+                    with today
+                  </span>
+                  <span className='text-5xl'>.</span>
+                </div>
               </div>
             </div>
 
@@ -347,7 +355,7 @@ const Home = () => {
       </section>
 
       {/*About&Media*/}
-      <section>
+      <section className='mx-auto max-w-6xl px-4 py-12'>
         <About_Media />
        </section>
 

@@ -44,23 +44,26 @@ const UpcomingConcerts = ({ limit = 3 }) => {
           {/* Header */}
           <div className="w-full max-w-4xl flex flex-col gap-6">
             <div className="border-l-2 border-[#c49b63] pl-4">
-              <h2 className="text-xl sm:text-5xl font-serif  tracking-tight text-neutral-700">
+              <h2 className="text-4xl sm:text-5xl font-serif  tracking-tight text-neutral-700 mb-4">
                 Upcoming concerts
               </h2>
 
-              <div className="flex justify-between">
-                <p className="mt-1 font-sans text-sm text-neutral-600">
+              <div className="mt-8 flex justify-between">
+                <p className="hidden md:block mt-1 font-sans text-sm text-neutral-600">
                   Dates are updated regularly.
                 </p>
 
                 <Link
                   to="/concerts"
                   className="
-                    group inline-flex items-center gap-2
+                    hidden md:inline-flex 
+                    items-center gap-2
+                    group 
                     text-sm font-medium text-gray-900
                     border-b-2 border-[#c49b63]
                     font-semibold
                     hover:text-neutral-700 transition
+                  
                   "
                 >
                   View all concerts
@@ -158,7 +161,30 @@ const UpcomingConcerts = ({ limit = 3 }) => {
               </div>
             </div>
           )}
+          <Link
+                  to="/concerts"
+                  className="
+                    inline-flex md:hidden 
+                    items-center gap-2
+                    group 
+                    text-sm font-medium text-gray-900
+                    border-b-2 border-[#c49b63]
+                    font-semibold
+                    hover:text-neutral-700 transition
+                  
+                  "
+                >
+                  View all concerts
+
+                  <span
+                    className="transition group-hover:translate-x-0.5"
+                    aria-hidden
+                  >
+                    <ArrowRight size={18} />
+                  </span>
+                </Link>
         </div>
+        
 
         {/* RIGHT COLUMN */}
         <aside

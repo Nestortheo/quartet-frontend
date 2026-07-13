@@ -141,16 +141,47 @@ export default function AboutRemake(){
                             emerging ensembles on the international stage.
                         </p>
                     </div>
+                    {view && (
+                    <div className='flex flex-col gap-4 text-neutral-700'>
+                        <p>
+                            At the Bad Tölz International String Quartet Competition in 2023
+                            they were awarded the Audience Prize Award of the City of Bad Tölz,
+                            as well as the Esterházy Foundation Special Prize for best interpretation
+                            of a Haydn string quartet. They also won the Bronze Medal at the 2024 Fischoff Chamber Music Competition.
+                         </p>
+                         <p>
+                             Since 2021 Erinys Quartet has been supported by Le Dimore del Quartetto where they are
+                             also a part of the European Union-sponsored MERITA platform.
+                        </p>
+                        <p>
+                            In the 2025–26 season the Erinys Quartet will present concerts throughout the United States and Europe,
+                            including debuts at the Philadelphia Chamber Music Society and the Lucerne Festival in Switzerland.
+                            They will also be giving concerts around the United States as part of Curtis on Tour performing with
+                            pianist Michelle Cann, violist Roberto Díaz, and cellist Peter Wiley.
+                        </p>
+                        <p>
+                            In addition to their studies at Indiana University with the Pacifica Quartet,
+                            Erinys holds a diploma in string quartet from the Curtis Institute of Music where
+                            they studied with the Dover Quartet, and they are pursuing a diploma in chamber music
+                             at Escuela Superior de Música Reina Sofía in Madrid, Spain under the tutelage of Professor
+                            Günter Pichler of the Alban Berg Quartet.
+                        </p>
+                    </div>
+                )}
+            
                     <button
                         type="button"
                         onClick={() => setView(!view)}
-                        className='flex gap-2 text-yellow-700'
+                        className='flex gap-2 text-yellow-700 md:hidden'
                     >
-                        <p className='text-sm'>
+                        <p className='text-sm '>
                             {view ? "Show less" : "Read More"}
                         </p>
                         <ArrowRight size={22} />
-                    </button>            
+                    </button>
+                    {/*Desktop */}
+                
+                                
                 </div>
                 {/* RIGHT */}
                 <div className='md:w-3/5 flex justify-end'>
@@ -168,38 +199,39 @@ export default function AboutRemake(){
                     />
                 </div>
             </div>
-            {view && (
-                        <div className='flex flex-col gap-4 text-neutral-700 mt-10'>
-                            <p>
-                                At the Bad Tölz International String Quartet Competition in 2023
-                                they were awarded the Audience Prize Award of the City of Bad Tölz,
-                                as well as the Esterházy Foundation Special Prize for best interpretation
-                                of a Haydn string quartet. They also won the Bronze Medal at the 2024 Fischoff Chamber Music Competition.
-                            </p>
-                            <p>
-                                Since 2021 Erinys Quartet has been supported by Le Dimore del Quartetto where they are
-                                 also a part of the European Union-sponsored MERITA platform.
-                            </p>
-                            <p>
-                                In the 2025–26 season the Erinys Quartet will present concerts throughout the United States and Europe,
-                                including debuts at the Philadelphia Chamber Music Society and the Lucerne Festival in Switzerland.
-                                They will also be giving concerts around the United States as part of Curtis on Tour performing with
-                                pianist Michelle Cann, violist Roberto Díaz, and cellist Peter Wiley.
-                            </p>
-                            <p>
-                                In addition to their studies at Indiana University with the Pacifica Quartet,
-                                Erinys holds a diploma in string quartet from the Curtis Institute of Music where
-                                they studied with the Dover Quartet, and they are pursuing a diploma in chamber music
-                                at Escuela Superior de Música Reina Sofía in Madrid, Spain under the tutelage of Professor
-                                Günter Pichler of the Alban Berg Quartet.
-                            </p>
-                        </div>
-                    )}
             
+            {/*Desktop Expanded Text + Achievements*/}
+            {/*
+            <div className="hidden md:max-w-3xl md:block md:flex flex-col gap-6 text-neutral-700 mt-16 pt-12 border-t border-[#c49b63]/40">
+                        <p>
+                            At the Bad Tölz International String Quartet Competition in 2023
+                            they were awarded the Audience Prize Award of the City of Bad Tölz,
+                            as well as the Esterházy Foundation Special Prize for best interpretation
+                            of a Haydn string quartet. They also won the Bronze Medal at the 2024 Fischoff Chamber Music Competition.
+                         </p>
+                         <p>
+                             Since 2021 Erinys Quartet has been supported by Le Dimore del Quartetto where they are
+                             also a part of the European Union-sponsored MERITA platform.
+                        </p>
+                        <p>
+                            In the 2025–26 season the Erinys Quartet will present concerts throughout the United States and Europe,
+                            including debuts at the Philadelphia Chamber Music Society and the Lucerne Festival in Switzerland.
+                            They will also be giving concerts around the United States as part of Curtis on Tour performing with
+                            pianist Michelle Cann, violist Roberto Díaz, and cellist Peter Wiley.
+                        </p>
+                        <p>
+                            In addition to their studies at Indiana University with the Pacifica Quartet,
+                            Erinys holds a diploma in string quartet from the Curtis Institute of Music where
+                            they studied with the Dover Quartet, and they are pursuing a diploma in chamber music
+                             at Escuela Superior de Música Reina Sofía in Madrid, Spain under the tutelage of Professor
+                            Günter Pichler of the Alban Berg Quartet.
+                        </p>
+                    </div>
                 
-            
+            */}
+           
             <div className='w-full h-px border border-yellow-700 mt-10'/>
-            <div className='flex flex-col md:flex-row gap-8 mt-16'>
+            <div className='hidden md:flex flex-col md:flex-row gap-8 mt-16'>
                         {achievements.map((achievement) => {
                             const Icon = achievement.icon;
                             return(
@@ -232,8 +264,7 @@ export default function AboutRemake(){
                                 </div>
                             )
                         })}
-                    </div>
-                    
+                    </div>   
             {/*The Ensemble*/}      
             <div className='flex flex-col gap-4 items-center mt-32'>
 

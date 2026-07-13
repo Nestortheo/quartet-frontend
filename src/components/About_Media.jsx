@@ -74,23 +74,24 @@ export default function About_Media(){
 
             {/*MEDIA*/}
             <div className='flex flex-col md:flex-row gap-16 mt-16 items-center'>
-                 {/*LEFT*/}
-                <div className='md:w-3/5 md:-mt-12'>
-            
+
+                {/* LEFT (Video second on mobile, left side on desktop) */}
+                <div className="order-2 md:order-1 w-full md:w-3/5 md:-mt-12">
+
                     <VideoCardMedia
-                        className="h-full w-full"
+                        className="w-full h-full"
                         video={{
-                        title: "Performance title",
-                        subtitle: "Venue • City • Year",
-                        url: "https://www.youtube.com/embed/RYanguk1JRk?start=2",
+                            title: "Performance title",
+                            subtitle: "Venue • City • Year",
+                            url: "https://www.youtube.com/embed/RYanguk1JRk?start=2",
                         }}
                         showMeta={true}
                     />
                 </div>
 
                 {/*RIGHT*/}
-                <div className='flex flex-col gap-8 md:w-2/ md:pt-8'>
-
+                <div className='order-1 md:order-2 flex flex-col gap-8 md:w-2/ md:pt-8'>
+                    
                     <h2 className='text-sm text-yellow-700'>OUR MEDIA</h2>
                     <div className='font-serif text-4xl leading-tight'>
                         <p>

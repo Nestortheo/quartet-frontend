@@ -10,12 +10,12 @@ import VideoCardMedia from "../components/VideoCardMedia";
 
 const Media = () => {
 
-  const videos = [
+const videos = [
     {id:1, title:"Janácek - Cuarteto de cuerda no. 2 'Cartas íntimas'", subtitle:"Madrid", url:"https://www.youtube.com/embed/RYanguk1JRk?start=2"},
     {id:2, title:"Bela Bartók: String Quartet No. 3, Sz. 85", subtitle:"", url:"https://www.youtube.com/embed/AqIV95zGFyg?start=2"},
     {id:3, title:"George Crumb: Black Angels", subtitle:"Gould Rehearsal Hall", url:"https://www.youtube.com/embed/_n5rUpyp3Eo?list=PL6bUhxrsclHfgowkZRfvXqeWtx-NFq5Vj&start=2"},
   ]
-  const photos = [
+const photos = [
   { id: 1, src: photo1, alt: "Erinys Quartet – Vienna" },
   { id: 2, src: photo2, alt: "Rehearsal" },
   { id: 3, src: photo3, alt: "Concert hall" },
@@ -57,7 +57,6 @@ const Media = () => {
              </div>       
         </section>
 
-        {/* PHOTOS */}
         {/* PHOTOS */}
         <section className="mt-10">
           <div className="mb-5">
