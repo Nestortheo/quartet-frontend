@@ -6,6 +6,13 @@ import photo2 from "../assets/2.png";
 import photo3 from "../assets/3.jpg";
 import photo4 from "../assets/HomeImage.png"
 import photo5 from "../assets/_C0A6131.jpg"
+import photo6 from "../assets/_C0A5854.jpg"
+import photo7 from "../assets/_C0A5969.jpg"
+import photo8 from "../assets/_C0A6079-2.jpg"
+import photo9 from "../assets/_C0A6050-2.jpg"
+import photo10 from "../assets/_C0A5869.jpg"
+
+
 import mediaHero from "../assets/3.jpg"; // adjust path
 import VideoCardMedia from "../components/VideoCardMedia";
 
@@ -13,8 +20,6 @@ const videos = [
     {id:1, title:"Janácek - Cuarteto de cuerda no. 2 'Cartas íntimas'", subtitle:"Madrid", url:"https://www.youtube.com/embed/RYanguk1JRk?start=2"},
     {id:2, title:"Bela Bartók: String Quartet No. 3, Sz. 85", subtitle:"", url:"https://www.youtube.com/embed/AqIV95zGFyg?start=2"},
     {id:3, title:"George Crumb: Black Angels", subtitle:"Gould Rehearsal Hall", url:"https://www.youtube.com/embed/_n5rUpyp3Eo?list=PL6bUhxrsclHfgowkZRfvXqeWtx-NFq5Vj&start=2"},
-    {id:4, title:"George Crumb: Black Angels", subtitle:"Gould Rehearsal Hall", url:"https://www.youtube.com/embed/_n5rUpyp3Eo?list=PL6bUhxrsclHfgowkZRfvXqeWtx-NFq5Vj&start=2"},
-    {id:5, title:"Bela Bartók: String Quartet No. 3, Sz. 85", subtitle:"", url:"https://www.youtube.com/embed/AqIV95zGFyg?start=2"},
 ]
 const photos = [
   { id: 1, src: photo1, alt: "Erinys Quartet – Vienna" },
@@ -22,11 +27,11 @@ const photos = [
   { id: 3, src: photo3, alt: "Concert hall" },
   { id: 4, src: photo4, alt: "Portrait" },
   { id: 5, src: photo5, alt: "Backstage" },
-  { id: 6, src: photo1, alt: "Erinys Quartet – Vienna" },
-  { id: 7, src: photo2, alt: "Rehearsal" },
-  { id: 8, src: photo3, alt: "Concert hall" },
-  { id: 9, src: photo4, alt: "Portrait" },
-  { id: 10, src: photo5, alt: "Backstage" },
+  { id: 6, src: photo6, alt: "Erinys Quartet – Vienna" },
+  { id: 7, src: photo7, alt: "Rehearsal" },
+  { id: 8, src: photo8, alt: "Concert hall" },
+  { id: 9, src: photo9, alt: "Portrait" },
+  { id: 10, src: photo10, alt: "Backstage" },
 ];
 
 export default function MediaRemake(){
@@ -36,7 +41,7 @@ export default function MediaRemake(){
     const [selectedPhoto, setSelectedPhoto] = useState(null);
 
     const displayVideos = 
-        showAllVideos ? videos : videos.slice(0,3)
+        showAllVideos ? videos : videos.slice(0,2)
 
     const displayPhotos = 
         showAllPhotos ? photos : photos.slice(0,5)
@@ -147,7 +152,7 @@ export default function MediaRemake(){
                 <div className="flex flex-col md:flex-row items-center justify-between">
                     <h2 className="text-sm text-yellow-700 font-semibold tracking-[0.2em]">FEATURED VIDEOS</h2>
                     {/*Desktop Button*/}
-                    {videos.length > 3 && (
+                    {videos.length > 2 && (
                     <button
                             type="button"
                             onClick={() => setShowAllVideos((prev) => !prev)}
@@ -169,7 +174,7 @@ export default function MediaRemake(){
                         </button>
                     )}
                 </div>
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                     {displayVideos.map((video) => (
                         <VideoCardMedia 
                             key={video.id}
@@ -178,7 +183,7 @@ export default function MediaRemake(){
                     ))}
                 </div>
                 {/*Mobile Button*/}
-                {videos.length > 3 && (
+                {videos.length > 2 && (
                 <button
                         type="button"
                         onClick={() => setShowAllVideos((prev) => !prev)}
