@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col items-center text-center gap-6">
           {/* Brand */}
-          <div className="space-y-2">
+          <div className="space-y-4">
             <p className="font-serif text-3xl tracking-[0.28em] text-[#D9A474]">
               Erinys Quartet
             </p>
@@ -22,7 +22,7 @@ export default function Footer() {
           </a>
 
           {/* Socials */}
-          <div className="flex items-center justify-center gap-5">
+          <div className="flex items-center justify-center gap-2 md:gap-5">
             <a
               href="https://www.instagram.com/erinysquartet"
               target="_blank"
@@ -53,7 +53,7 @@ export default function Footer() {
               </p>
               </div>
             </a>
-            <div className="w-px h-5 bg-[#776D62]/60" />
+            <div className="hidden md:block w-px h-5 bg-[#776D62]/60" />
 
             <a
               href="https://facebook.com/erinysquartet"
@@ -85,7 +85,7 @@ export default function Footer() {
                 </p>
               </div>
             </a>
-            <div className="w-px h-5 bg-[#776D62]/60" />
+            <div className="hidden md:block w-px h-5 bg-[#776D62]/60" />
 
             <a
               href="https://www.youtube.com/@erinysquartet"

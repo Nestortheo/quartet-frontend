@@ -77,9 +77,9 @@ export default function Contact() {
       >
         {/*LEFT*/}
         <div className="
+              w-full
               md:w-2/5 
               mt-10 
-              max-w-3xl mx-auto
               flex
               flex-col
               gap-8
@@ -135,7 +135,7 @@ export default function Contact() {
                 </div>
               </div>
               {/*Social Icons*/}
-                <div className="flex gap-8 items-center justify-center w-full">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 w-full">
                     <a 
                       href="https://www.instagram.com/erinysquartet/"
                       target="_blank"
@@ -145,7 +145,7 @@ export default function Contact() {
                         <Instagram size={22}/>
                         <p>Instagram</p>
                     </a>
-                    <div className="w-px h-5 bg-yellow-700/60" />
+                    <div className="hidden md:block w-px h-5 bg-yellow-700/60" />
                     
                     <a
                       href="https://www.facebook.com/erinysquartet/" 
@@ -157,7 +157,7 @@ export default function Contact() {
                         <p>Facebook</p>
                         
                     </a>
-                    <div className="w-px h-5 bg-yellow-700/60" />
+                    <div className="hidden md:block w-px h-5 bg-yellow-700/60" />
 
                     <a
                       href="https://www.youtube.com/@erinysquartet" 
@@ -175,9 +175,9 @@ export default function Contact() {
         </div>
       
         {/*RIGHT*/}
-        <div className="md:w-3/5 mt-10 max-w-2xl mx-auto">
+        <div className="md:w-3/5 mt-10 w-full max-w-xl mx-auto">
         {/* Form card */}
-          <div className=" rounded-3xl border border border-black/10 bg-white/30 p-6 shadow-sm backdrop-blur-md sm:p-8">
+          <div className="rounded-3xl border border border-black/10 bg-white/30 p-6 shadow-sm backdrop-blur-md sm:p-8">
             <h2 className="text-xl font-semibold text-gray-900">Send a message</h2>
             <p className="mt-1 text-sm text-gray-600">
               We usually reply within a few days.
