@@ -40,6 +40,8 @@ export default function MediaRemake(){
     const [showAllPhotos, setShowAllPhotos] = useState(false);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
 
+    const [selectedPhotoTesting, setSelectedPhotoTesting] = useState(null);
+
     const displayVideos = 
         showAllVideos ? videos : videos.slice(0,2)
 
@@ -126,7 +128,7 @@ export default function MediaRemake(){
 
     return(
         <main className="mt-24">
-            <section className="relative h-[35vh] overflow-hidden">
+            <section className="relative h-[35vh] md:h-[60vh] overflow-hidden">
                 <img 
                     src={mediaHero}
                     alt="Erinys Quartet"
@@ -138,7 +140,7 @@ export default function MediaRemake(){
                 {/* Content */}
                 <div className="relative z-10 flex h-full items-center justify-center">
                     <div className="flex flex-col items-center gap-4">
-                        <p className="mb-3 text-5xl uppercase tracking-[0.3em] text-[#D9A474]">MEDIA</p>
+                        <p className="mb-3 text-4xl md:text-5xl uppercase tracking-[0.3em] text-[#D9A474]">media</p>
                         <div className="w-20 h-px bg-[#D9A474]"/>
                         <p className="text-lg text-[#D8CDC0] max-w-2xl leading-relaxed text-center"
                         >
@@ -358,6 +360,60 @@ export default function MediaRemake(){
                 </div>
             )}
 
+
+            {/*Practice*/}
+            <section className="border border-red-400 max-w-7xl mx-auto p-8 mt-12">
+                {/*Title + Button */}
+                <div className="flex items-center justify-between">
+                    <h2 className="text-sm text-yellow-700 font-semibold">PHOTO GALLERY REMAKE</h2>
+                    <button
+                        type="button"
+                        className="text-sm text-yellow-700 flex gap-2 cursor-pointer"
+
+                    >
+                        View all photos
+                        <ArrowRight />
+                    </button>
+                </div>
+                {/*Gallery of Photos*/}
+                <div className="grid md:grid-cols-5 gap-4">
+                    {photos.map((photo,index) => (
+                        <div
+                            key={photo.id}
+                            className="
+                                relative
+                                aspect-[4.8/5]
+                                overflow-hidden
+                                rounded-xl
+                                cursor-pointer
+                                border border-yellow-600
+                            "
+                        >
+                        <img 
+                            src={photo.src}
+                            alt={photo.alt}
+
+                            className="
+                                    absolute
+                                    inset-0
+                                    h-full
+                                    w-full
+                                    object-cover
+                                    transition
+                                    duration-500
+                                    hover:scale-105
+                                "
+                            onClick={() => {
+                                setSelectedPhotoTesting(index)
+                                console.log(selectedPhotoTesting)
+                                }
+                            }
+                        />
+
+                        </div>
+                    ))}
+                </div>
+            </section>
         </main>    
     )
 }

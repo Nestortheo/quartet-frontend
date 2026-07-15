@@ -6,8 +6,8 @@ function getYouTubeId(url) {
     url.match(/youtu\.be\/([^?&]+)/) ||
     url.match(/[?&]v=([^?&]+)/) ||
     url.match(/\/embed\/([^?&]+)/);
-    console.log("URL:", url);
-    console.log("match result (m):", m);
+    //console.log("URL:", url);
+    //console.log("match result (m):", m);
   return m?.[1] ?? null;
 }
 

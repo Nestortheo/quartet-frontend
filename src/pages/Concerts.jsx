@@ -3,7 +3,7 @@ import useConcerts from "../hooks/useConcerts"; // ✅ adjust path
 import { deleteConcert } from "../api/concerts";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
-import mediaHero from "../assets/ConcertView.jpg"; // adjust path
+import concertHero from "../assets/ConcertView.jpg"; // adjust path
 import ConcertRow from "../components/ConcertRow"
 
 const PAST_LIMIT = 6;
@@ -79,34 +79,31 @@ export default function Concerts(){
 
 
 return (
-  <main>
-    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-      {/*Hero Image */}
-      <section className="
-                  relative mb-10 overflow-hidden mt-16
-                  rounded-3xl border border-black/5
-                  shadow-[0_10px_40px_rgba(0,0,0,0.12)]
-                "
-      >
-          <img
-            src={mediaHero}
-            alt="Erinys Quartet — Media"
-            className="h-44 w-full object-cover md:h-85 
-            "
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/30 to-transparent" />
+  <main className="mt-24">
+      {/* Full-width Hero */}
+      <section className="relative h-[45vh] md:h-[60vh] overflow-hidden">
+        <img
+          src={concertHero}
+          alt="Erinys Quartet — Concerts"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
 
-          <div className="absolute inset-0 flex items-end">
-            <div className="p-6 md:p-8">
-              <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">
-                Concerts
-              </h1>
-              <p className="mt-1 text-sm text-white/80">
-                Dates are updated regularly.
-              </p>
-            </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-transparent" />
+
+        <div className="absolute inset-0 flex items-end">
+          <div className="mx-auto w-full max-w-6xl px-6 pb-14">
+            <h1 className="text-3xl md:text-5xl font-serif uppercase tracking-[0.3em] text-[#D9A474]">
+              concerts
+            </h1>
+
+            <p className="mt-3 max-w-sm text-lg text-[#D8CDC0] leading-relaxed ">
+              Explore upcoming performances, festivals, and venues where Erinys Quartet will perform.
+            </p>
           </div>
-      </section>
+        </div>
+    </section>
+
+    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
 
       {/* TOP ROW (only admin button now) */}
       <div className="mb-10 flex items-end justify-end gap-4">
