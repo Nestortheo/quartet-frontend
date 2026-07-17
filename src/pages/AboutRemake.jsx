@@ -293,8 +293,8 @@ export default function AboutRemake(){
                                 w-full
                                 h-full
                                 max-h-[460px]
-                                rounded-xl
-                                object-cover
+                                rounded-xl 
+                                object-cover object-top
                                 shadow-xl
                                 hover:scale-[1.01]
                                 transition

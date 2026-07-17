@@ -306,7 +306,7 @@ export default function MediaRemake(){
                 {/* <- PREV image */}
                     <button
                         type="button"
-                        className="mr-8"
+                        className="hidden md:block mr-8"
                          onClick={(e) => {
                             e.stopPropagation();
                             prevPhoto();
@@ -349,7 +349,7 @@ export default function MediaRemake(){
                     {/* -> NEXT image */}
                     <button
                         type="button"
-                        className="ml-8"
+                        className="hidden md:block ml-8"
                         onClick={(e) => {
                             e.stopPropagation();
                             nextPhoto();
