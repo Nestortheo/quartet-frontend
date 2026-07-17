@@ -270,7 +270,7 @@ export default function AboutRemake(){
 
                 <h2 className='text-sm text-yellow-700'>THE ENSEMBLE</h2>
                 <div className='w-10 h-px border border-yellow-700'/>
-                <p className='text-5xl '>Meet the Musicians</p>
+                <p className='text-5xl text-center mt-10'>Meet the Musicians</p>
                 
                 
                 {ensemble.map((musician) => (
