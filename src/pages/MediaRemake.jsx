@@ -359,61 +359,6 @@ export default function MediaRemake(){
                     </button>
                 </div>
             )}
-
-
-            {/*Practice*/}
-            <section className="border border-red-400 max-w-7xl mx-auto p-8 mt-12">
-                {/*Title + Button */}
-                <div className="flex items-center justify-between">
-                    <h2 className="text-sm text-yellow-700 font-semibold">PHOTO GALLERY REMAKE</h2>
-                    <button
-                        type="button"
-                        className="text-sm text-yellow-700 flex gap-2 cursor-pointer"
-
-                    >
-                        View all photos
-                        <ArrowRight />
-                    </button>
-                </div>
-                {/*Gallery of Photos*/}
-                <div className="grid md:grid-cols-5 gap-4">
-                    {photos.map((photo,index) => (
-                        <div
-                            key={photo.id}
-                            className="
-                                relative
-                                aspect-[4.8/5]
-                                overflow-hidden
-                                rounded-xl
-                                cursor-pointer
-                                border border-yellow-600
-                            "
-                        >
-                        <img 
-                            src={photo.src}
-                            alt={photo.alt}
-
-                            className="
-                                    absolute
-                                    inset-0
-                                    h-full
-                                    w-full
-                                    object-cover
-                                    transition
-                                    duration-500
-                                    hover:scale-105
-                                "
-                            onClick={() => {
-                                setSelectedPhotoTesting(index)
-                                console.log(selectedPhotoTesting)
-                                }
-                            }
-                        />
-
-                        </div>
-                    ))}
-                </div>
-            </section>
         </main>    
     )
 }

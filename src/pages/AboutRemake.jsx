@@ -129,7 +129,7 @@ export default function AboutRemake(){
                         <p>
                             Named for Erinyes (a.k.a the Furies) from the Greek tragedy Oresteia
                             by Aeschylus the Erinya Quartet was founded in 2018 at the Sibelius
-                            Academy in Helsinki where they worked closely with cellist Marko Ylönen
+                            Academy in Helsinki where they worked closely with cellist Marko Ylönen.
                         </p>
                         <p>
                             Since Autumn 2025 Erinys has been the graduate string quartet-in-
@@ -270,7 +270,7 @@ export default function AboutRemake(){
 
                 <h2 className='text-sm text-yellow-700'>THE ENSEMBLE</h2>
                 <div className='w-10 h-px border border-yellow-700'/>
-                <p className='text-5xl '>Meet the Musicians.</p>
+                <p className='text-5xl '>Meet the Musicians</p>
                 
                 
                 {ensemble.map((musician) => (
