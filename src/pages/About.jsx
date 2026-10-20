@@ -16,7 +16,7 @@ const About = () => {
   return (
     <main>
       <section className="
-          relative overflow-hidden bg-black mt-25
+          relative overflow-hidden bg-black mt-30
 
           h-[42vh] min-h-[280px] max-h-[520px]
           sm:h-[52vh] sm:min-h-[360px] sm:max-h-[600px]

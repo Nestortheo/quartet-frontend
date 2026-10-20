@@ -107,7 +107,7 @@ export default function AboutRemake(){
     console.log("view ->",view)
 
     return(
-        <section className='max-w-7xl mx-auto mt-25 p-10'>
+        <section className='max-w-7xl mx-auto px-4 py-12 md:py-16 mt-32'>
             {/*About Hero Div */}
             <div className='flex flex-col items-center md:flex-row gap-2 '>
                 {/* LEFT */}

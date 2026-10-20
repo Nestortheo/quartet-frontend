@@ -70,16 +70,16 @@ export default function Contact() {
 
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 md:py-16 mt-16">
+    <section className="mx-auto max-w-7xl px-4 py-12 md:py-16 mt-32">
       <div className="
-            flex flex-col md:flex-row gap-4   
+            flex flex-col md:flex-row gap-2  
           "
       >
         {/*LEFT*/}
         <div className="
               w-full
               md:w-2/5 
-              mt-10 
+              
               flex
               flex-col
               gap-8
@@ -175,7 +175,7 @@ export default function Contact() {
         </div>
       
         {/*RIGHT*/}
-        <div className="md:w-3/5 mt-10 w-full max-w-xl mx-auto">
+        <div className="md:w-3/5  w-full max-w-xl mx-auto">
         {/* Form card */}
           <div className="rounded-3xl border border border-black/10 bg-white/30 p-6 shadow-sm backdrop-blur-md sm:p-8">
             <h2 className="text-xl font-semibold text-gray-900">Send a message</h2>
@@ -272,6 +272,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
