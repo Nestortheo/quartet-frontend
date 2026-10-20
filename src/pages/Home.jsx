@@ -72,16 +72,23 @@ const Home = () => {
             "
           >
             <div className="-ml-[10vw] max-w-2xl translate-y-12  space-y-8">
-              <p className="text-sm tracking-[0.2em] text-[#c49b63]">
+              {/* EYEBROW */}
+              <p className="font-sans text-sm tracking-[0.2em] text-[#c49b63]">
                 ERYNIS · STRING QUARTET
               </p>
 
               <div>
-                <h1 className="font-serif text-3xl md:text-6xl text-white leading-none">
+                <h1
+                  className="text-4xl md:text-6xl text-white leading-[0.95]"
+                  style={{ fontFamily: '"Cormorant Garamond", serif' }}
+                >
                   Timeless music,
                 </h1>
 
-                <div className="flex gap-2 font-serif text-3xl md:text-6xl leading-none">
+                <div
+                  className="flex flex-wrap gap-x-4 text-4xl md:text-6xl leading-[0.95]"
+                  style={{ fontFamily: '"Cormorant Garamond", serif' }}
+                >
                   <span className="text-white">in</span>
 
                   <span className="italic text-[#c49b63]">
@@ -91,10 +98,11 @@ const Home = () => {
                   <span className="text-white">
                     with today.
                   </span>
+                 
                 </div>
               </div>
 
-              <div className="text-neutral-300 leading-relaxed text-lg">
+              <div className="font-sans text-base md:text-lg text-neutral-300 leading-relaxed max-w-lg">
                 <p>Erinys Quartet brings classical depth and</p>
                 <p>contemporary perspective together,</p>
                 <p>shaping programs around contrast,</p>
@@ -215,26 +223,30 @@ const Home = () => {
         <div className="
               relative z-10 mt-[-20px]
               h-full
-              flex
-              items-center
-              justify-center
+              flex items-center justify-center
             ">
-              <div className="text-center">
-                <p className="font-serif text-4xl text-[#444]">
+              <div className="text-center px-4">
+                <p 
+                  className="font-serif text-3xl md:text-4xl text-[var(--color-foreground)] leading-tight"
+                  style={{ fontFamily: '"Cormorant Garamond", serif' }}
+                >
                   Rooted in
                   <span className="italic text-[#c49b63]">
                     {" "}tradition,
                   </span>
                 </p>
 
-                <p className="font-serif text-4xl text-[#444]">
+                <p
+                  className="text-3xl md:text-4xl text-[var(--color-foreground)] leading-tight"
+                  style={{ fontFamily: '"Cormorant Garamond", serif' }}
+                >
                   moving with the
                   <span className="italic text-[#c49b63]">
                     {" "}present.
                   </span>
                 </p>
               </div>
-            </div>
+        </div>
 
           {/* Curved bottom */}
           <div
@@ -246,7 +258,7 @@ const Home = () => {
               w-full
               h-12
 
-              bg-[#eceae7]/70
+              bg-[#eceae7]/60
 
               rounded-t-[100%]
             "

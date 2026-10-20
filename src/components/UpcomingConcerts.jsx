@@ -44,7 +44,10 @@ const UpcomingConcerts = ({ limit = 3 }) => {
           {/* Header */}
           <div className="w-full max-w-4xl flex flex-col gap-6">
             <div className="border-l-2 border-[#c49b63] pl-4">
-              <h2 className="text-4xl sm:text-5xl font-serif  tracking-tight text-neutral-700 mb-4">
+              <h2
+                className="text-4xl sm:text-5xl tracking-tight mb-4"
+                
+              >
                 Upcoming concerts
               </h2>
 
@@ -56,14 +59,14 @@ const UpcomingConcerts = ({ limit = 3 }) => {
                 <Link
                   to="/concerts"
                   className="
-                    hidden md:inline-flex 
+                    hidden md:inline-flex
                     items-center gap-2
-                    group 
-                    text-sm font-medium text-gray-900
-                    border-b-2 border-[#c49b63]
-                    font-semibold
-                    hover:text-neutral-700 transition
-                  
+                    group
+                    text-sm font-medium
+                    text-[var(--color-foreground)]
+                    border-b-2 border-[var(--color-accent)]
+                    hover:text-[var(--color-secondary)]
+                    transition
                   "
                 >
                   View all concerts
@@ -162,17 +165,17 @@ const UpcomingConcerts = ({ limit = 3 }) => {
             </div>
           )}
           <Link
-                  to="/concerts"
-                  className="
-                    inline-flex md:hidden 
-                    items-center gap-2
-                    group 
-                    text-sm font-medium text-gray-900
-                    border-b-2 border-[#c49b63]
-                    font-semibold
-                    hover:text-neutral-700 transition
-                  
-                  "
+              to="/concerts"
+              className="
+                inline-flex md:hidden 
+                items-center gap-2
+                group
+                text-sm font-medium
+                text-[var(--color-foreground)]
+                border-b-2 border-[var(--color-accent)]
+                hover:text-[var(--color-secondary)]
+                transition   
+              "
                 >
                   View all concerts
 
@@ -182,7 +185,7 @@ const UpcomingConcerts = ({ limit = 3 }) => {
                   >
                     <ArrowRight size={18} />
                   </span>
-                </Link>
+            </Link>
         </div>
         
 
@@ -191,33 +194,23 @@ const UpcomingConcerts = ({ limit = 3 }) => {
           className="
             hidden lg:flex
             flex-col justify-center
-            border-l border-[#c49b63]
+            border-l border-[var(--color-accent)]
             pl-8
             relative
             
           "
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-[#c49b63]">
+          <p className="font-sans text-xs uppercase tracking-[0.25em] text-[var(--color-accent)]">
             2026 Season
           </p>
-
-          <h3
-            className="
-              mt-8
-              text-4xl
-              leading-tight
-              text-neutral-800
-              font-serif
-            "
-          >
+          <h3 className="mt-8 text-4xl leading-tight text-[var(--color-foreground)]">
             Timeless music,
             <br />
             shared moments.
           </h3>
+          <div className="mt-8 h-px w-12 bg-[var(--color-accent)]" />
 
-          <div className="mt-8 h-px w-12 bg-[#c49b63]" />
-
-          <p className="mt-8 text-xs uppercase tracking-[0.25em] text-neutral-500">
+          <p className="mt-8 font-sans text-xs uppercase tracking-[0.25em] text-[var(--color-secondary)]">
             Erinys Quartet
           </p>
 

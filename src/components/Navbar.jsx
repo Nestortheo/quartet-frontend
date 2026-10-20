@@ -9,7 +9,8 @@ export default function MyNavbar() {
 
   const linkBase = `
     block px-3 py-2
-    text-sm md:text-[15px]
+    text-sm md:text-[14px]
+    tracking-[0.02em]
     rounded-md
     transition-colors duration-200
   `;
@@ -38,7 +39,7 @@ export default function MyNavbar() {
           ${
             transparentHero
               ? "bg-transparent"
-              : "bg-[#e4ddd5]/70 backdrop-blur-sm border-b border-black/15"
+              : "bg-[var(--color-navbar)]  border-b border-[var(--color-primary)]/15"
           }
         `}
       >
@@ -47,12 +48,25 @@ export default function MyNavbar() {
           <Link
             to="/"
             className={`
+              flex flex-col items-center
               text-lg font-medium tracking-widest uppercase
               transition-colors duration-300
-              ${transparentHero ? "text-white" : "text-gray-900"}
+              ${transparentHero ? "text-white" : "text-[var(--color-foreground)]"}
             `}
           >
-            Erinys Quartet
+            <span
+              className="font-serif text-2xl md:text-5xl tracking-[0.18em] uppercase"
+              style={{ fontFamily: '"Cormorant Garamond", serif' }}
+            >
+              Erinys
+            </span>
+
+            <span 
+              className="mt-1.5 text-[9px] md:text-[14px] uppercase tracking-[0.28em]"
+              style={{ fontFamily: '"Cormorant Garamond", serif' }}
+            >
+              String Quartet
+            </span>
           </Link>
 
           {/* Desktop nav */}
@@ -72,7 +86,7 @@ export default function MyNavbar() {
                       ${
                         transparentHero
                           ? "text-white/80 hover:text-white"
-                          : "text-gray-700 hover:text-black"
+                          : "text-[var(--color-secondary)] hover:text-[var(--color-primary)]"
                       }
                       ${
                         isActive

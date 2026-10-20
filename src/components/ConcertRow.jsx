@@ -77,69 +77,76 @@ export default function ConcertRow({ concert, isAdmin, handleDelete, variant }) 
             onError={(e) => {
               e.currentTarget.src = venueFallback;
             }}
-             className={
-              isHome
-                ? "w-40 h-28 flex-shrink-0 overflow-hidden rounded-xl"
-                : "w-48 h-38 flex-shrink-0 overflow-hidden rounded-xl"
-            }
+             className="w-[280px] h-[180px] flex-shrink-0 overflow-hidden rounded-xl object-center"
           />
         </div>
 
         {/* Details */}
-        <div className="flex-1">
-          <div className="flex flex-wrap items-center justify-start gap-3">
+        <div className="w-full min-w-0 flex-1 text-center md:text-left">
+          {/* Concert Title */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
             <Link to={`/concerts/${concert.id}`}>
-              <h2 className="text-2xl font-semibold text-gray-900">
+              <h2
+                className="text-2xl font-bold leading-tight text-[var(--color-foreground)]"
+              >
                 {concert.title}
               </h2>
             </Link>
 
             {isPast && (
-              <span className="rounded-full border border-gray-900/15 bg-gray-900/5 px-3 py-1 text-xs font-medium text-gray-700">
-                Completed
-              </span>
-            )}
+                  <span className="rounded-full border border-[var(--color-primary)]/15 bg-[var(--color-primary)]/5 px-3 py-1 text-xs font-medium text-[var(--color-secondary)]">
+                    Completed
+                  </span>
+                )}
           </div>
 
-          {/*Country*/}
-          <div>
-            <span className="text-base text-neutral-500">{concert.venue_detail.city}, {concert.venue_detail.country}</span>
-          </div>
+          {/* Location */}
+          <p className="mt-1 font-sans text-base text-[var(--color-secondary)]">
+            {concert.venue_detail.city}, {concert.venue_detail.country}
+          </p>
 
-          {/* Venue+Map */}
+          {/* Venue and map */}
           {(venue || mapUrl) && (
-            <div className={isHome ? "flex flex-col md:flex-row gap-2 md:gap-8 mt-2 space-y-1" : "flex flex-col mt-2 space-y-1"}>
-              <div className="flex items-center gap-1">
-                <Building2 size={14} className="text-yellow-700" />
-                <span className="text-sm tracking-tight text-neutral-600">{concert.venue_detail.name}</span>
-              </div>
+            <div className="mt-3 flex flex-col items-center sm:items-start gap-2">
+              {venue && (
+                <div className="flex items-center gap-2">
+                  <Building2
+                    size={15}
+                    className="mt-0.5 shrink-0 text-[var(--color-accent)]"
+                  />
+                  <span className="font-sans text-sm text-[var(--color-secondary)]">
+                    {concert.venue_detail.name}
+                  </span>
+                </div>
+              )}
 
-              <a
-                href={mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  inline-flex
-                  items-center
-                  gap-1
-                  text-gray-900
-                  hover:text-gray-700
-                "
-              >
-                <MapPin size={14} className="text-yellow-700" />
-                <span className="text-sm tracking-tight text-neutral-600">
-                  {concert.venue_detail.city}
-                </span>
-              </a>
+              {mapUrl && (
+                <a
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-start gap-2 text-[var(--color-secondary)] transition-colors hover:text-[var(--color-primary)]"
+                >
+                  <MapPin
+                    size={15}
+                    className="mt-0.5 shrink-0 text-[var(--color-accent)]"
+                  />
+                  <span className="font-sans text-sm">
+                    {concert.venue_detail.city}
+                  </span>
+                </a>
+              )}
             </div>
           )}
 
           {/* Program */}
           {program.length > 0 && (
-            <ul className="mt-3 text-sm text-gray-700  border-t border-[#e8dfd4]">
+            <ul className="mt-3 border-t border-[var(--color-primary)]/10 pt-2 font-sans text-sm text-[var(--color-secondary)]">
               {program.map((p) => (
                 <li key={p.id}>
-                  <span className="font-semibold">{p.composer}:</span>{" "}
+                  <span className="font-semibold text-[var(--color-foreground)]">
+                    {p.composer}:
+                  </span>{" "}
                   <span>{p.title}</span>
                 </li>
               ))}
@@ -147,58 +154,67 @@ export default function ConcertRow({ concert, isAdmin, handleDelete, variant }) 
           )}
         </div>
 
-        {/* Ticket Info only in Upcoming concerts*/}
-        <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link
-              to={`/concerts/${concert.id}`}
-              className={
-                isHome
-                  ? `
-                    inline-flex items-center 
-                    bg-white/10 text-black
-                    px-4 py-4 rounded-full border border-[#d8c3a5]
-                    text-sm font-medium
-                  `
-                  : `
-                    inline-flex items-center rounded-xl 
-                    bg-gray-900 text-white
-                    px-6 py-3
-                    text-sm font-medium
-                  `
-              }
-            >
-              {isHome ? (
-                <ArrowRight size={22} />
-              ) : (
-                <div className="flex items-center gap-2">
-                  <p>Details</p>
-                  <ArrowRight size={18}/>
-              </div>
-              )}
-             
-              
-            </Link>
-            {concert.ticket_link && !isPast && !isHome &&(
-              <a
-                href={concert.ticket_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  inline-flex items-center rounded-xl
-                  border border-[#d8c3a5]
-                  bg-transparent
-                  text-[#b8860b]
-                  px-5 py-2
-                  text-sm font-medium
+        {/* Ticket Info only in Upcoming concerts */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            to={`/concerts/${concert.id}`}
+            className={
+              isHome
+                ? `
+                  inline-flex items-center justify-center
+                  rounded-full
+                  border border-[var(--color-accent)]/60
+                  bg-[var(--color-navbar)]/30
+                  text-[var(--color-foreground)]
+                  px-4 py-4
+                  font-sans text-sm font-medium
                   transition-all duration-200
-                  hover:bg-[#faf4e8]
-                  hover:border-[#b8860b]
-                  hover:-translate-y-0.5
-                "
-              >
-                Ticket
-              </a>
+                  hover:bg-[var(--color-accent)]/10
+                `
+                : `
+                  inline-flex items-center justify-center gap-2
+                  rounded-xl
+                  bg-[var(--color-primary)]
+                  text-[var(--color-navbar)]
+                  px-6 py-3
+                  font-sans text-sm font-medium
+                  transition-all duration-200
+                  hover:bg-[var(--color-secondary)]
+                `
+            }
+          >
+            {isHome ? (
+              <ArrowRight size={22} />
+            ) : (
+              <>
+                <span>Details</span>
+                <ArrowRight size={18} />
+              </>
             )}
+          </Link>
+
+          {concert.ticket_link && !isPast && !isHome && (
+            <a
+              href={concert.ticket_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                inline-flex items-center justify-center
+                rounded-xl
+                border border-[var(--color-accent)]/70
+                bg-transparent
+                text-[var(--color-foreground)]
+                px-5 py-2
+                font-sans text-sm font-medium
+                transition-all duration-200
+                hover:bg-[var(--color-accent)]/10
+                hover:border-[var(--color-accent)]
+                hover:-translate-y-0.5
+              "
+            >
+              Ticket
+            </a>
+          )}
         </div>
 
         {/* Admin controls */}
