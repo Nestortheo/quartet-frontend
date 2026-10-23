@@ -71,7 +71,14 @@ const Home = () => {
               items-center 
             "
           >
-            <div className="-ml-[10vw] max-w-2xl translate-y-12  space-y-8">
+            <div className="
+              w-full max-w-2xl
+              translate-y-12
+              space-y-8
+              xl:ml-[2vw]
+              2xl:-ml-[8vw]
+            "
+            >
               {/* EYEBROW */}
               <p className="font-sans text-sm tracking-[0.2em] text-[#c49b63]">
                 ERYNIS · STRING QUARTET
