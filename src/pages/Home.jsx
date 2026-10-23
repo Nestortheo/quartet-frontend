@@ -28,19 +28,19 @@ const Home = () => {
           src={heroImg}
           alt="Erinys Quartet"
           className="
-            hidden md:block
+            hidden lg:block
             absolute inset-0
             h-full w-full  
             object-cover
             object-[50%_60%] 
          "
         />
-        {/*Mobile Hero Img */}
+       {/* Mobile + Tablet Hero Image */}
         <img 
           src={mobileHero}
           alt='Erinys Quartet'
           className='
-            block md:hidden
+            block lg:hidden
             h-full w-full
             object-cover
             object-[50%_80%]
@@ -202,7 +202,7 @@ const Home = () => {
       </section>
 
       {/*Desktop Bridge*/}
-      <section className="hidden md:block relative overflow-hidden h-[380px] bg-[#eceae7]">
+      <section className="hidden lg:block relative overflow-hidden h-[380px] bg-[#eceae7]">
         <img
           src={instruments}
           alt=""
@@ -272,7 +272,7 @@ const Home = () => {
           />
       </section>
       
-      {/*INTRO SECTION FOR MOBILE*/}
+      {/*INTRO SECTION FOR MOBILE + Tablet*/}
       <section className="relative overflow-hidden mx-auto max-w-6xl px-4 py-16">
  
         {/*Intro mobile background img*/}
@@ -280,7 +280,7 @@ const Home = () => {
           src={introImg}
           alt=""
           className="
-            block md:hidden
+            block lg:hidden
             absolute
             right-[-250px]
             top-1/2
@@ -299,37 +299,43 @@ const Home = () => {
         />
 
       
-        {/* Content for Mobile */}
-        <div className="block md:hidden relative z-10 flex items-center justify-center pt-10">
+        {/* Content for Mobile + tablet */}
+        <div className="
+                block lg:hidden 
+                relative z-10
+                flex items-center justify-start
+                pt-10 sm:pt-14 sm:ml-14
+               "
+        >
           <div className="space-y-8">
 
-            <p className="text-sm tracking-wider text-[#c49b63]">
+            <p className="text-sm sm:text-base tracking-wider text-[#c49b63]">
               ERINYS · STRING QUARTET
             </p>
 
             <div className='h-px w-10 border border-yellow-700'/>
 
-            <div className="font-serif leading-none">
-              <h2 className="text-5xl">
+            <div className="font-serif leading-none flex flex-col gap-2">
+              <h2 className="text-5xl sm:text-6xl">
                 Timeless
               </h2>
 
-              <h2 className="text-5xl italic text-[#c49b63]">
+              <h2 className="text-5xl sm:text-6xl italic text-[#c49b63]">
                 music,
               </h2>
 
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-2">
 
                 <div className='flex gap-2'>
-                  <span className="text-5xl">in</span>
+                  <p className="text-4xl sm:text-6xl">in</p>
 
-                  <span className="text-5xl ">
+                  <p className="text-4xl sm:text-6xl">
                     dialogue
-                  </span>
+                  </p>
                 </div>
                 
                 <div>
-                  <span className="text-5xl italic text-[#c49b63]">
+                  <span className="text-5xl sm:text-6xl italic text-[#c49b63]">
                     with today
                   </span>
                   <span className='text-5xl'>.</span>
@@ -337,7 +343,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="text-neutral-700 leading-relaxed">
+            <div className="text-neutral-700 leading-relaxed text-base sm:text-lg">
               <p>Erinys Quartet brings classical depth and</p>
               <p>contemporary perspective together,</p>
               <p>shaping programs around contrast,</p>
